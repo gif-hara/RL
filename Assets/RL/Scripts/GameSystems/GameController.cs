@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using RL.GameSystems.FieldGenerators;
+using RL.GameSystems.FieldSystems;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace RL.GameSystems
@@ -25,6 +27,9 @@ namespace RL.GameSystems
         [SerializeField]
         private RectTransform fieldTransform;
 
+        [SerializeField]
+        private ScriptableFieldGenerator fieldGenerator;
+
         void Awake()
         {
             instance = this;
@@ -34,8 +39,17 @@ namespace RL.GameSystems
         {
             this.uiSizeAdjuster.Adjust();
             this.fieldController.CreateCells();
+            this.fieldController.GenerateField(this.fieldGenerator);
             this.PlayerController = Instantiate(this.playerPrefab, this.fieldTransform);
             this.PlayerController.Initialize(0, 0, FieldController.Size);
+        }
+
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.J))
+            {
+                this.fieldController.GenerateField(this.fieldGenerator);
+            }
         }
     }
 }

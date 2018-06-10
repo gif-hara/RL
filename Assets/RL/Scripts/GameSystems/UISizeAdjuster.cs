@@ -17,10 +17,7 @@ namespace RL.GameSystems
         private RectTransform fieldView;
 
         [SerializeField]
-        private RectTransform leftView;
-
-        [SerializeField]
-        private RectTransform rightView;
+        private RectTransform informationView;
 
 #if UNITY_EDITOR
         void Update()
@@ -32,16 +29,15 @@ namespace RL.GameSystems
         public void Adjust()
         {
             this.AdjustFieldView();
-            this.AdjusterLeftView();
-            this.AdjusterRightView();
+            this.AdjusterInformationView();
         }
 
         private void AdjustFieldView()
         {
-            Vector2 center = Vector2.one * 0.5f;
-            this.fieldView.anchorMin = center;
-            this.fieldView.anchorMax = center;
-            this.fieldView.pivot = center;
+            var up = Vector2.up;
+            this.fieldView.anchorMin = up;
+            this.fieldView.anchorMax = up;
+            this.fieldView.pivot = up;
             this.fieldView.anchoredPosition = Vector2.zero;
             var width = this.root.rect.width;
             var height = this.root.rect.height;
@@ -55,44 +51,25 @@ namespace RL.GameSystems
             }
         }
 
-        private void AdjusterLeftView()
+        private void AdjusterInformationView()
         {
-            this.leftView.anchorMin = Vector2.up;
-            this.leftView.anchorMax = Vector2.up;
-            this.leftView.pivot = Vector2.up;
-            this.leftView.anchoredPosition = Vector2.zero;
+            var up = Vector2.up;
+            this.informationView.anchorMin = up;
+            this.informationView.anchorMax = up;
+            this.informationView.pivot = up;
             var width = this.root.rect.width;
             var height = this.root.rect.height;
             if (width > height)
             {
-                var size = (width - height) * 0.5f;
-                this.leftView.sizeDelta = new Vector2(size, height);
+                var size = (width - height);
+                this.informationView.sizeDelta = new Vector2(size, height);
+                this.informationView.anchoredPosition = new Vector2(height, 0.0f);
             }
             else
             {
-                var size = (height - width) * 0.5f;
-                this.leftView.sizeDelta = new Vector2(width, size);
-            }
-        }
-
-        private void AdjusterRightView()
-        {
-            this.rightView.anchorMin = Vector2.up;
-            this.rightView.anchorMax = Vector2.up;
-            this.rightView.pivot = Vector2.up;
-            var width = this.root.rect.width;
-            var height = this.root.rect.height;
-            if (width > height)
-            {
-                var size = (width - height) * 0.5f;
-                this.rightView.sizeDelta = new Vector2(size, height);
-                this.rightView.anchoredPosition = new Vector2(height + size, 0.0f);
-            }
-            else
-            {
-                var size = (height - width) * 0.5f;
-                this.rightView.sizeDelta = new Vector2(width, size);
-                this.rightView.anchoredPosition = new Vector2(0.0f, -(width + size));
+                var size = (height - width);
+                this.informationView.sizeDelta = new Vector2(width, size);
+                this.informationView.anchoredPosition = new Vector2(0.0f, -width);
             }
         }
     }

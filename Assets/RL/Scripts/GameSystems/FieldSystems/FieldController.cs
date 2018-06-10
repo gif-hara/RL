@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using RL.GameSystems.FieldGenerators;
+using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace RL.GameSystems
+namespace RL.GameSystems.FieldSystems
 {
     /// <summary>
     /// 
@@ -15,6 +17,8 @@ namespace RL.GameSystems
         private int matrixNumber;
 
         private CellController[,] cells;
+
+        private readonly List<Room> rooms = new List<Room>();
 
         private float size;
 
@@ -40,6 +44,18 @@ namespace RL.GameSystems
                     this.cells[y, x] = cell;
                 }
             }
+        }
+
+        public void GenerateField(IFieldGenerator generator)
+        {
+            for (int y = 0; y < this.matrixNumber; y++)
+            {
+                for (int x = 0; x < this.matrixNumber; x++)
+                {
+                    this.cells[y, x].SetCanMove(false);
+                }
+            }
+            generator.Generate();
         }
 
         public static Vector2 GetPosition(int x, int y)
@@ -72,6 +88,14 @@ namespace RL.GameSystems
             get
             {
                 return GameController.Instance.FieldController.cells;
+            }
+        }
+
+        public static List<Room> Rooms
+        {
+            get
+            {
+                return GameController.Instance.FieldController.rooms;
             }
         }
 
