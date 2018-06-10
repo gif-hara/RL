@@ -12,20 +12,15 @@ namespace RL.GameSystems
     {
         [SerializeField]
         private RectTransform root;
-        
+
         [SerializeField]
         private RectTransform fieldView;
-        
+
         [SerializeField]
         private RectTransform leftView;
-        
+
         [SerializeField]
         private RectTransform rightView;
-
-        void Start()
-        {
-            this.Adjust();
-        }
 
 #if UNITY_EDITOR
         void Update()
@@ -34,7 +29,7 @@ namespace RL.GameSystems
         }
 #endif
 
-        private void Adjust()
+        public void Adjust()
         {
             this.AdjustFieldView();
             this.AdjusterLeftView();
@@ -50,7 +45,7 @@ namespace RL.GameSystems
             this.fieldView.anchoredPosition = Vector2.zero;
             var width = this.root.rect.width;
             var height = this.root.rect.height;
-            if(width > height)
+            if (width > height)
             {
                 this.fieldView.sizeDelta = Vector2.one * height;
             }
@@ -68,7 +63,7 @@ namespace RL.GameSystems
             this.leftView.anchoredPosition = Vector2.zero;
             var width = this.root.rect.width;
             var height = this.root.rect.height;
-            if(width > height)
+            if (width > height)
             {
                 var size = (width - height) * 0.5f;
                 this.leftView.sizeDelta = new Vector2(size, height);
@@ -87,7 +82,7 @@ namespace RL.GameSystems
             this.rightView.pivot = Vector2.up;
             var width = this.root.rect.width;
             var height = this.root.rect.height;
-            if(width > height)
+            if (width > height)
             {
                 var size = (width - height) * 0.5f;
                 this.rightView.sizeDelta = new Vector2(size, height);
