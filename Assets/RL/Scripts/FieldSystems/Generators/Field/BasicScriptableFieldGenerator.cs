@@ -8,7 +8,7 @@ namespace RL.FieldSystems.Generators.Field
     /// <summary>
     /// 通常のダンジョンフィールドを生成する
     /// </summary>
-    [CreateAssetMenu(menuName = "RL/FieldGenerator/Basic")]
+    [CreateAssetMenu(menuName = "RL/FieldSystem/Generator/Field/Basic")]
     public sealed class BasicScriptableFieldGenerator : ScriptableFieldGenerator
     {
         [SerializeField]

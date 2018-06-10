@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Name: Basic
   m_EditorClassIdentifier: 
   roomMin:
-    x: 2
+    x: 1
     y: 2
   roomMax:
+    x: 3
+    y: 3
+  paddingMin:
+    x: 2
+    y: 2
+  paddingMax:
     x: 4
     y: 4
-  paddingMin:
+  offsetSize:
     x: 1
     y: 1
-  paddingMax:
-    x: 6
-    y: 6
