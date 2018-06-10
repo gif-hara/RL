@@ -14,9 +14,9 @@ namespace RL.GameSystems
         [SerializeField]
         private int matrixNumber;
 
-        public CellController[,] Cells { get; private set; }
+        private CellController[,] cells;
 
-        public float Size { get; private set; }
+        private float size;
 
         public void CreateCells()
         {
@@ -26,25 +26,69 @@ namespace RL.GameSystems
                 return;
             }
 
-            this.Cells = new CellController[this.matrixNumber, this.matrixNumber];
+            this.cells = new CellController[this.matrixNumber, this.matrixNumber];
             var t = (RectTransform)this.transform;
             Assert.IsNotNull(t);
-            this.Size = (t.rect.width / this.matrixNumber);
+            this.size = (t.rect.width / this.matrixNumber);
 
             for (int y = 0; y < this.matrixNumber; y++)
             {
                 for (int x = 0; x < this.matrixNumber; x++)
                 {
                     var cell = Instantiate(this.cellPrefab, t);
-                    cell.Initialize(x, y, this.GetPosition(x, y), this.Size);
-                    this.Cells[y, x] = cell;
+                    cell.Initialize(x, y, GetPosition(x, y), this.size);
+                    this.cells[y, x] = cell;
                 }
             }
         }
 
-        public Vector2 GetPosition(int x, int y)
+        public static Vector2 GetPosition(int x, int y)
         {
-            return new Vector2(x * this.Size, -y * this.Size);
+            var instance = GameController.Instance.FieldController;
+            return new Vector2(x * instance.size, -y * instance.size);
+        }
+
+        public static bool CanMove(int x, int y)
+        {
+            // フィールド外へ侵入しようとしてたら移動できない
+            if (x < 0 || x >= XMax || y < 0 || y >= YMax)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static float Size
+        {
+            get
+            {
+                return GameController.Instance.FieldController.size;
+            }
+        }
+
+        public static CellController[,] Cells
+        {
+            get
+            {
+                return GameController.Instance.FieldController.cells;
+            }
+        }
+
+        public static int XMax
+        {
+            get
+            {
+                return GameController.Instance.FieldController.matrixNumber;
+            }
+        }
+
+        public static int YMax
+        {
+            get
+            {
+                return GameController.Instance.FieldController.matrixNumber;
+            }
         }
     }
 }

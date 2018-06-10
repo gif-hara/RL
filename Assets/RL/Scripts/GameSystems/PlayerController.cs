@@ -49,24 +49,22 @@ namespace RL.GameSystems
             this.x = x;
             this.y = y;
             this.cachedTransform.sizeDelta = Vector2.one * size;
-            this.cachedTransform.anchoredPosition = GetPosition(this.x, this.y);
+            this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.x, this.y);
         }
 
         private void Move(int nextX, int nextY)
         {
-            this.x = nextX;
-            this.y = nextY;
-            this.cachedTransform.anchoredPosition = GetPosition(this.x, this.y);
+            if (FieldController.CanMove(nextX, nextY))
+            {
+                this.x = nextX;
+                this.y = nextY;
+                this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.x, this.y);
+            }
         }
 
         private static bool GetKeyDown(KeyCode keyCode)
         {
             return Input.GetKeyDown(keyCode);
-        }
-
-        private static Vector2 GetPosition(int x, int y)
-        {
-            return GameController.Instance.FieldController.GetPosition(x, y);
         }
     }
 }

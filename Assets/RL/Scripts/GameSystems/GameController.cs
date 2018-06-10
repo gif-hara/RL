@@ -35,7 +35,7 @@ namespace RL.GameSystems
             this.uiSizeAdjuster.Adjust();
             this.fieldController.CreateCells();
             this.PlayerController = Instantiate(this.playerPrefab, this.fieldTransform);
-            this.PlayerController.Initialize(0, 0, this.fieldController.Size);
+            this.PlayerController.Initialize(0, 0, FieldController.Size);
         }
     }
 }
