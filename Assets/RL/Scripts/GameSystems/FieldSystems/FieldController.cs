@@ -18,7 +18,7 @@ namespace RL.GameSystems.FieldSystems
 
         private CellController[,] cells;
 
-        private readonly List<Room> rooms = new List<Room>();
+        private readonly List<List<Room>> roomMatrix = new List<List<Room>>();
 
         private float size;
 
@@ -91,11 +91,11 @@ namespace RL.GameSystems.FieldSystems
             }
         }
 
-        public static List<Room> Rooms
+        public static List<List<Room>> RoomMatrix
         {
             get
             {
-                return GameController.Instance.FieldController.rooms;
+                return GameController.Instance.FieldController.roomMatrix;
             }
         }
 

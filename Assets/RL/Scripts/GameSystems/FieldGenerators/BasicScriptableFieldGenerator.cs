@@ -1,4 +1,5 @@
-﻿using RL.GameSystems.FieldSystems;
+﻿using System.Collections.Generic;
+using RL.GameSystems.FieldSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -22,9 +23,20 @@ namespace RL.GameSystems.FieldGenerators
         [SerializeField]
         private Point paddingMax;
 
+        [SerializeField]
+        private Point offsetSize;
+
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            this.offsetSize.x = Mathf.Clamp(this.offsetSize.x, 0, this.paddingMax.x);
+            this.offsetSize.y = Mathf.Clamp(this.offsetSize.y, 0, this.paddingMax.y);
+        }
+#endif
+
         public override void Generate()
         {
-            FieldController.Rooms.Clear();
+            FieldController.RoomMatrix.Clear();
 
             var horizontal = Random.Range(this.roomMin.x, this.roomMax.x + 1);
             var vertical = Random.Range(this.roomMin.y, this.roomMax.y + 1);
@@ -32,15 +44,18 @@ namespace RL.GameSystems.FieldGenerators
             var verticalSize = FieldController.YMax / vertical;
             for (var y = 0; y < vertical; y++)
             {
+                var rooms = new List<Room>();
+                FieldController.RoomMatrix.Add(rooms);
                 for (var x = 0; x < horizontal; x++)
                 {
                     var room = new Room(
                         new Point(x * horizontalSize, y * verticalSize),
                         new Point(horizontalSize, verticalSize),
                         this.paddingMin,
-                        this.paddingMax
+                        this.paddingMax,
+                        this.offsetSize
                         );
-                    FieldController.Rooms.Add(room);
+                    rooms.Add(room);
                 }
             }
         }

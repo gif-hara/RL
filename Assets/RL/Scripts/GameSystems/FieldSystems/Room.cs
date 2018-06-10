@@ -11,28 +11,26 @@ namespace RL.GameSystems.FieldSystems
     {
         public readonly List<CellController> Cells = new List<CellController>();
 
-        public Room(Point start, Point size, Point paddingMin, Point paddingMax)
+        public Room(Point start, Point size, Point paddingMin, Point paddingMax, Point offsetSize)
         {
             // RoomGenerator的なクラスに生成させたい
-            var paddingX = Random.Range(paddingMin.x, paddingMax.x);
-            var paddingY = Random.Range(paddingMin.y, paddingMax.y);
-            var offsetX = Random.Range(0, paddingX);
-            var offsetY = Random.Range(0, paddingY);
-            for (var y = 0; y < size.y; y++)
+            var padding = new Point(
+                Random.Range(paddingMin.x, paddingMax.x + 1),
+                Random.Range(paddingMin.y, paddingMax.y + 1)
+            );
+            var offset = new Point(
+                Random.Range(-offsetSize.x, offsetSize.x + 1),
+                Random.Range(-offsetSize.y, offsetSize.y + 1)
+            );
+            for (var y = 0; y < (size.y - padding.y * 2); y++)
             {
-                for (var x = 0; x < size.x; x++)
+                for (var x = 0; x < (size.x - padding.x * 2); x++)
                 {
-                    var canMove =
-                        x >= paddingX && x < (size.x - paddingX)
-                        && y >= paddingY && y < (size.y - paddingY);
-                    if (!canMove)
-                    {
-                        continue;
-                    }
-
-                    var cell = FieldController.Cells[start.y + offsetY + y, start.x + offsetX + x];
+                    var cy = start.y + (padding.y) + offset.y + y;
+                    var cx = start.x + (padding.x) + offset.x + x;
+                    var cell = FieldController.Cells[cy, cx];
                     this.Cells.Add(cell);
-                    cell.SetCanMove(canMove);
+                    cell.SetCanMove(true);
                 }
             }
         }
