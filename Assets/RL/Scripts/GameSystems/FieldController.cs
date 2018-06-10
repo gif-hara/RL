@@ -14,6 +14,10 @@ namespace RL.GameSystems
         [SerializeField]
         private int matrixNumber;
 
+        public CellController[,] Cells { get; private set; }
+
+        public float Size { get; private set; }
+
         public void CreateCells()
         {
             if (this.matrixNumber <= 0)
@@ -22,18 +26,25 @@ namespace RL.GameSystems
                 return;
             }
 
+            this.Cells = new CellController[this.matrixNumber, this.matrixNumber];
             var t = (RectTransform)this.transform;
             Assert.IsNotNull(t);
-            var size = (t.rect.width / this.matrixNumber);
+            this.Size = (t.rect.width / this.matrixNumber);
 
             for (int y = 0; y < this.matrixNumber; y++)
             {
                 for (int x = 0; x < this.matrixNumber; x++)
                 {
                     var cell = Instantiate(this.cellPrefab, t);
-                    cell.Initialize(x, y, new Vector2(size * x, -size * y), size);
+                    cell.Initialize(x, y, this.GetPosition(x, y), this.Size);
+                    this.Cells[y, x] = cell;
                 }
             }
+        }
+
+        public Vector2 GetPosition(int x, int y)
+        {
+            return new Vector2(x * this.Size, -y * this.Size);
         }
     }
 }

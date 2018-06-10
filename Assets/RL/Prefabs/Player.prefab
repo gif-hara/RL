@@ -36,15 +36,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224631928802072480}
-  - component: {fileID: 114440227713635984}
+  - component: {fileID: 114118991521064298}
   m_Layer: 5
-  m_Name: Cell
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114440227713635984
+--- !u!114 &114118991521064298
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1779714312754454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f515ebad3251640759fe07185c381c6b, type: 3}
+  m_Script: {fileID: 11500000, guid: b7c39a9a278a347c0ad6bee654ee58b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114546638420942344
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.36008072, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

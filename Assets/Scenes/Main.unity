@@ -502,6 +502,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiSizeAdjuster: {fileID: 517987450}
   fieldController: {fileID: 1769088160}
+  playerPrefab: {fileID: 114118991521064298, guid: 6bee90eb38a8a405a8b28fd8c42bbe9f,
+    type: 2}
+  fieldTransform: {fileID: 201446314}
 --- !u!4 &975540487
 Transform:
   m_ObjectHideFlags: 0
@@ -733,7 +736,7 @@ GameObject:
   - component: {fileID: 1769088161}
   - component: {fileID: 1769088160}
   m_Layer: 5
-  m_Name: Contents
+  m_Name: Cells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,8 +755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 114440227713635984, guid: 04ef027124e1847cfb9972e402e2eda3,
     type: 2}
-  matrixNumber: 2
-  padding: 0
+  matrixNumber: 40
 --- !u!224 &1769088161
 RectTransform:
   m_ObjectHideFlags: 0
