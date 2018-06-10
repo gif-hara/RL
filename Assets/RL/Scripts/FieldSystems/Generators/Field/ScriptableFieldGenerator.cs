@@ -1,8 +1,7 @@
-﻿using RL.GameSystems.FieldSystems;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace RL.GameSystems.FieldGenerators
+namespace RL.FieldSystems.Generators.Field
 {
     /// <summary>
     /// 

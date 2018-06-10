@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using RL.GameSystems.FieldSystems;
+using RL.FieldSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace RL.GameSystems.FieldGenerators
+namespace RL.FieldSystems.Generators.Field
 {
     /// <summary>
     /// 通常のダンジョンフィールドを生成する

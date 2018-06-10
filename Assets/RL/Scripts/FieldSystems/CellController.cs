@@ -2,7 +2,7 @@
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-namespace RL.GameSystems.FieldSystems
+namespace RL.FieldSystems
 {
     /// <summary>
     /// 

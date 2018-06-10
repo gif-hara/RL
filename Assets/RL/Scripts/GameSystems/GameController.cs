@@ -1,5 +1,5 @@
-﻿using RL.GameSystems.FieldGenerators;
-using RL.GameSystems.FieldSystems;
+﻿using RL.FieldSystems;
+using RL.FieldSystems.Generators.Field;
 using UnityEngine;
 using UnityEngine.Assertions;
 

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using RL.GameSystems.FieldGenerators;
+using RL.FieldSystems.Generators.Field;
+using RL.GameSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace RL.GameSystems.FieldSystems
+namespace RL.FieldSystems
 {
     /// <summary>
     /// 
