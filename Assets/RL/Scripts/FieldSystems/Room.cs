@@ -5,11 +5,14 @@ using UnityEngine.Assertions;
 namespace RL.FieldSystems
 {
     /// <summary>
-    /// 
+    /// 部屋クラス
     /// </summary>
     public sealed class Room
     {
-        public readonly List<CellController> Cells = new List<CellController>();
+        /// <summary>
+        /// 部屋を構成する全てのセル
+        /// </summary>
+        public readonly CellController[] Cells;
 
         public Room(Point start, Point size, Point paddingMin, Point paddingMax, Point offsetSize)
         {
@@ -22,14 +25,17 @@ namespace RL.FieldSystems
                 Random.Range(-offsetSize.x, offsetSize.x + 1),
                 Random.Range(-offsetSize.y, offsetSize.y + 1)
             );
-            for (var y = 0; y < (size.y - padding.y * 2); y++)
+            var fixedSize = size - (padding * 2);
+            this.Cells = new CellController[fixedSize.x * fixedSize.y];
+            for (var y = 0; y < fixedSize.y; y++)
             {
-                for (var x = 0; x < (size.x - padding.x * 2); x++)
+                for (var x = 0; x < fixedSize.x; x++)
                 {
                     var cy = start.y + (padding.y) + offset.y + y;
                     var cx = start.x + (padding.x) + offset.x + x;
                     var cell = FieldController.Cells[cy, cx];
-                    this.Cells.Add(cell);
+                    var i = (fixedSize.x * y) + x;
+                    this.Cells[i] = cell;
                     cell.SetCanMove(true);
                 }
             }
