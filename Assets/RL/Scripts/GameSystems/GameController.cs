@@ -41,7 +41,8 @@ namespace RL.GameSystems
             this.fieldController.CreateCells();
             this.fieldController.GenerateField(this.fieldGenerator);
             this.PlayerController = Instantiate(this.playerPrefab, this.fieldTransform);
-            this.PlayerController.Initialize(new Point(0, 0), FieldController.Size);
+            this.PlayerController.Initialize(FieldController.Size);
+            this.PlayerController.SetPositionFromRandomRoom();
         }
 
         void Update()
@@ -55,6 +56,7 @@ namespace RL.GameSystems
         private void GenerateField()
         {
             this.fieldController.GenerateField(this.fieldGenerator);
+            this.PlayerController.SetPositionFromRandomRoom();
         }
     }
 }

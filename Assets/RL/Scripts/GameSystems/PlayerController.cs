@@ -45,9 +45,8 @@ namespace RL.GameSystems
             }
         }
 
-        public void Initialize(Point id, float size)
+        public void Initialize(float size)
         {
-            this.Id = id;
             this.cachedTransform.sizeDelta = Vector2.one * size;
             this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
         }
@@ -57,6 +56,14 @@ namespace RL.GameSystems
             Assert.IsTrue(FieldController.Cells[id.y, id.x].CanMove, $"移動できないセルに移動しました id = {id}");
             this.Id = id;
             this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
+        }
+
+        public void SetPositionFromRandomRoom()
+        {
+            var rooms = FieldController.AllRoom;
+            var room = rooms[Random.Range(0, rooms.Count)];
+            var cell = room.Cells[Random.Range(0, room.Cells.Length)];
+            this.SetPosition(cell.Id);
         }
 
         private void Move(Point nextId)

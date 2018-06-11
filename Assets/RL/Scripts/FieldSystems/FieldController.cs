@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RL.FieldSystems.Generators.Field;
 using RL.GameSystems;
 using UnityEngine;
@@ -98,6 +99,16 @@ namespace RL.FieldSystems
             get
             {
                 return GameController.Instance.FieldController.roomMatrix;
+            }
+        }
+
+        public static List<Room> AllRoom
+        {
+            get
+            {
+                var result = new List<Room>();
+                RoomMatrix.ForEach(r => result.AddRange(r));
+                return result;
             }
         }
 
