@@ -41,15 +41,20 @@ namespace RL.GameSystems
             this.fieldController.CreateCells();
             this.fieldController.GenerateField(this.fieldGenerator);
             this.PlayerController = Instantiate(this.playerPrefab, this.fieldTransform);
-            this.PlayerController.Initialize(0, 0, FieldController.Size);
+            this.PlayerController.Initialize(new Point(0, 0), FieldController.Size);
         }
 
         void Update()
         {
             if(Input.GetKeyDown(KeyCode.J))
             {
-                this.fieldController.GenerateField(this.fieldGenerator);
+                this.GenerateField();
             }
+        }
+
+        private void GenerateField()
+        {
+            this.fieldController.GenerateField(this.fieldGenerator);
         }
     }
 }

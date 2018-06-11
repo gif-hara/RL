@@ -87,5 +87,10 @@ namespace RL
         {
             return this.x.GetHashCode() ^ this.y.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return $"(x = {this.x} y = {this.y})";
+        }
     }
 }

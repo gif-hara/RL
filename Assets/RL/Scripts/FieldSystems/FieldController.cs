@@ -41,7 +41,8 @@ namespace RL.FieldSystems
                 for (int x = 0; x < this.matrixNumber; x++)
                 {
                     var cell = Instantiate(this.cellPrefab, t);
-                    cell.Initialize(new Point(x, y), GetPosition(x, y), this.size);
+                    var id = new Point(x, y);
+                    cell.Initialize(id, GetPosition(id), this.size);
                     this.cells[y, x] = cell;
                 }
             }
@@ -59,16 +60,16 @@ namespace RL.FieldSystems
             generator.Generate();
         }
 
-        public static Vector2 GetPosition(int x, int y)
+        public static Vector2 GetPosition(Point id)
         {
             var instance = GameController.Instance.FieldController;
-            return new Vector2(x * instance.size, -y * instance.size);
+            return new Vector2(id.x * instance.size, -id.y * instance.size);
         }
 
-        public static bool CanMove(int x, int y)
+        public static bool CanMove(Point id)
         {
             // フィールド外へ侵入しようとしてたら移動できない
-            if (x < 0 || x >= XMax || y < 0 || y >= YMax)
+            if (id.x < 0 || id.x >= XMax || id.y < 0 || id.y >= YMax)
             {
                 return false;
             }

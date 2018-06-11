@@ -11,7 +11,7 @@ namespace RL.GameSystems
     {
         private RectTransform cachedTransform;
 
-        private int x, y;
+        public Point Id { get; private set; }
 
         void Awake()
         {
@@ -41,25 +41,29 @@ namespace RL.GameSystems
 
             if (x != 0 || y != 0)
             {
-                this.Move(this.x + x, this.y + y);
+                this.Move(this.Id + new Point(x, y));
             }
         }
 
-        public void Initialize(int x, int y, float size)
+        public void Initialize(Point id, float size)
         {
-            this.x = x;
-            this.y = y;
+            this.Id = id;
             this.cachedTransform.sizeDelta = Vector2.one * size;
-            this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.x, this.y);
+            this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
         }
 
-        private void Move(int nextX, int nextY)
+        public void SetPosition(Point id)
         {
-            if (FieldController.CanMove(nextX, nextY))
+            Assert.IsTrue(FieldController.Cells[id.y, id.x].CanMove, $"移動できないセルに移動しました id = {id}");
+            this.Id = id;
+            this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
+        }
+
+        private void Move(Point nextId)
+        {
+            if (FieldController.CanMove(nextId))
             {
-                this.x = nextX;
-                this.y = nextY;
-                this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.x, this.y);
+                this.SetPosition(nextId);
             }
         }
 
