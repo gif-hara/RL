@@ -20,41 +20,60 @@ namespace RL.FieldSystems.Generators.Aisle
                 for (var x = 0; x < rooms.Count; x++)
                 {
                     // 水平方向の通路を作成する
-                    var i = x;
-                    var k = x + 1;
-                    if(k < rooms.Count)
+                    var h = x + 1;
+                    if(h < rooms.Count)
                     {
-                        this.Generate(rooms[i], rooms[k]);
+                        this.Generate(rooms[x], rooms[h]);
                     }
 
                     // 垂直方向の通路を作成する
-                    var nextY = y + 1;
-                    if(nextY < roomMatrix.Count)
+                    var v = y + 1;
+                    if(v < roomMatrix.Count)
                     {
-                        var nextRooms = roomMatrix[nextY];
-                        if(x < nextRooms.Count)
+                        var vRooms = roomMatrix[v];
+                        if(x < vRooms.Count)
                         {
-                            this.Generate(rooms[i], nextRooms[x]);
+                            this.Generate(rooms[x], vRooms[x]);
                         }
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// 部屋と部屋を繋ぐ通路を作成する
+        /// </summary>
+        /// <remarks>
+        /// <paramref name="a"/>から<paramref name="b"/>の方向を算出してそれぞれの側面を取得する
+        /// 側面同士の中央点を算出したあと始点と終点を同時に通路を作成して中央点で繋げるようにしている
+        /// </remarks>
         private void Generate(Room a, Room b)
         {
-            // aからbへの通路の開始方向を算出する
+            // aからbへの方向、bからaへの方向を算出する
             var direction = (b.Id - a.Id).ToDirection().ToCross();
             var invertDirection = direction.Invert();
-            var startEdge = a.Edges.GetFromDirection(direction);
-            var endEdge = b.Edges.GetFromDirection(invertDirection);
-            var startId = startEdge.RandomCell.Id;
-            var endId = endEdge.RandomCell.Id;
+
+            // aとbの側面を取得する
+            var aEdge = a.Edges.GetFromDirection(direction);
+            var bEdge = b.Edges.GetFromDirection(invertDirection);
+
+            // aとbの通路地点（始点と終点）を算出する
+            var startId = aEdge.RandomCell.Id;
+            var endId = bEdge.RandomCell.Id;
+
+            // 始点と終点の中央点を算出する
             var centerId = (startId + endId) / 2;
+
+            // 始点から通路を作成
             this.SetCanMove(startId, centerId, direction);
+
+            // 終点から通路を作成
             this.SetCanMove(endId, centerId, invertDirection);
         }
 
+        /// <summary>
+        /// <paramref name="to"/>までの通路を作成する
+        /// </summary>
         private void SetCanMove(Point from, Point to, Direction direction)
         {
             while(from != to)
