@@ -1,4 +1,6 @@
 ﻿using System;
+using RL.Extensions;
+using RL.GameSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -31,6 +33,36 @@ namespace RL
         {
             this.x = x;
             this.y = y;
+        }
+
+        public Point Abs
+        {
+            get
+            {
+                return new Point(Mathf.Abs(this.x), Mathf.Abs(this.y));
+            }
+        }
+
+        /// <summary>
+        /// 水平方向の要素を返す
+        /// </summary>
+        public Point Horizontal
+        {
+            get
+            {
+                return new Point(this.x, 0);
+            }
+        }
+
+        /// <summary>
+        /// 垂直方向の要素を返す
+        /// </summary>
+        public Point Vertical
+        {
+            get
+            {
+                return new Point(0, this.y);
+            }
         }
 
         public static Point operator +(Point left, Point right)

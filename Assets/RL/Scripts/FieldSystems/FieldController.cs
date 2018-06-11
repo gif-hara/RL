@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RL.Extensions;
 using RL.FieldSystems.Generators.Field;
 using RL.GameSystems;
 using UnityEngine;
@@ -76,21 +77,19 @@ namespace RL.FieldSystems
             }
 
             var diff = next - current;
-            for (var y = diff.y; y != 0; y -= (int)Mathf.Sign(diff.y))
+            var amount = diff.Abs;
+            for (var y = 0; y <= amount.y; y++)
             {
-                if (!Cells[current.y + y, current.x].CanMove)
+                for (var x = 0; x <= amount.x; x++)
                 {
-                    return false;
+                    var targetId = current + (diff.Vertical * y) + (diff.Horizontal * x);
+                    if (!Cells[targetId.y, targetId.x].CanMove)
+                    {
+                        return false;
+                    }
                 }
             }
 
-            for (var x = diff.x; x != 0; x -= (int)Mathf.Sign(diff.x))
-            {
-                if (!Cells[current.y, current.x + x].CanMove)
-                {
-                    return false;
-                }
-            }
             return true;
         }
 

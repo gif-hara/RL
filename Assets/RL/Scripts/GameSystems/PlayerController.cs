@@ -41,7 +41,7 @@ namespace RL.GameSystems
 
             if (x != 0 || y != 0)
             {
-                this.Move(this.Id + new Point(x, y));
+                this.Move(this.Id + new Point(x, y), false);
             }
         }
 
@@ -63,12 +63,12 @@ namespace RL.GameSystems
             var rooms = FieldController.AllRoom;
             var room = rooms[Random.Range(0, rooms.Count)];
             var cell = room.Cells[Random.Range(0, room.Cells.Length)];
-            this.SetPosition(cell.Id);
+            this.Move(cell.Id, true);
         }
 
-        private void Move(Point nextId)
+        private void Move(Point nextId, bool isForce)
         {
-            if (FieldController.CanMove(this.Id, nextId))
+            if (isForce || FieldController.CanMove(this.Id, nextId))
             {
                 this.SetPosition(nextId);
             }
