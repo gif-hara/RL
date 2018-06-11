@@ -67,14 +67,30 @@ namespace RL.FieldSystems
             return new Vector2(id.x * instance.size, -id.y * instance.size);
         }
 
-        public static bool CanMove(Point id)
+        public static bool CanMove(Point current, Point next)
         {
             // フィールド外へ侵入しようとしてたら移動できない
-            if (id.x < 0 || id.x >= XMax || id.y < 0 || id.y >= YMax)
+            if (next.x < 0 || next.x >= XMax || next.y < 0 || next.y >= YMax)
             {
                 return false;
             }
 
+            var diff = next - current;
+            for (var y = diff.y; y != 0; y -= (int)Mathf.Sign(diff.y))
+            {
+                if (!Cells[current.y + y, current.x].CanMove)
+                {
+                    return false;
+                }
+            }
+
+            for (var x = diff.x; x != 0; x -= (int)Mathf.Sign(diff.x))
+            {
+                if (!Cells[current.y, current.x + x].CanMove)
+                {
+                    return false;
+                }
+            }
             return true;
         }
 

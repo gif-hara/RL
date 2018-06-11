@@ -68,7 +68,7 @@ namespace RL.GameSystems
 
         private void Move(Point nextId)
         {
-            if (FieldController.CanMove(nextId))
+            if (FieldController.CanMove(this.Id, nextId))
             {
                 this.SetPosition(nextId);
             }
