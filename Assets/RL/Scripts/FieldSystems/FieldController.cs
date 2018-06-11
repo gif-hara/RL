@@ -41,7 +41,7 @@ namespace RL.FieldSystems
                 for (int x = 0; x < this.matrixNumber; x++)
                 {
                     var cell = Instantiate(this.cellPrefab, t);
-                    cell.Initialize(x, y, GetPosition(x, y), this.size);
+                    cell.Initialize(new Point(x, y), GetPosition(x, y), this.size);
                     this.cells[y, x] = cell;
                 }
             }

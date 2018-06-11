@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,21 +10,27 @@ namespace RL.FieldSystems
     /// </summary>
     public sealed class Room
     {
+        public readonly Point Id;
+
         /// <summary>
         /// 部屋を構成する全てのセル
         /// </summary>
         public readonly CellController[] Cells;
 
-        public Room(Point start, Point size, Point paddingMin, Point paddingMax, Point offsetSize)
+        public readonly Edges Edges;
+
+        public Room(Point id, Point start, Point size, Point paddingMin, Point paddingMax, Point offsetSize)
         {
-            // RoomGenerator的なクラスに生成させたい
+            this.Id = id;
+            
+            // TODO: RoomGenerator的なクラスに生成させたい
             var padding = new Point(
-                Random.Range(paddingMin.x, paddingMax.x + 1),
-                Random.Range(paddingMin.y, paddingMax.y + 1)
+                UnityEngine.Random.Range(paddingMin.x, paddingMax.x + 1),
+                UnityEngine.Random.Range(paddingMin.y, paddingMax.y + 1)
             );
             var offset = new Point(
-                Random.Range(-offsetSize.x, offsetSize.x + 1),
-                Random.Range(-offsetSize.y, offsetSize.y + 1)
+                UnityEngine.Random.Range(-offsetSize.x, offsetSize.x + 1),
+                UnityEngine.Random.Range(-offsetSize.y, offsetSize.y + 1)
             );
             var fixedSize = size - (padding * 2);
             this.Cells = new CellController[fixedSize.x * fixedSize.y];
@@ -39,6 +46,8 @@ namespace RL.FieldSystems
                     cell.SetCanMove(true);
                 }
             }
+
+            this.Edges = new Edges(this.Cells);
         }
     }
 }

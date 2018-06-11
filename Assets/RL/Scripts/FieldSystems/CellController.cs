@@ -18,19 +18,20 @@ namespace RL.FieldSystems
         [SerializeField]
         private Color notMovableColor;
 
-        public int X { get; private set; }
+        public Point Id { get; private set; }
 
-        public int Y { get; private set; }
+        public int X { get { return this.Id.x; } }
+
+        public int Y { get { return this.Id.y; } }
 
         /// <summary>
         /// 移動可能か
         /// </summary>
         public bool CanMove { get; private set; } = true;
 
-        public void Initialize(int x, int y, Vector2 position, float size)
+        public void Initialize(Point id, Vector2 position, float size)
         {
-            this.X = x;
-            this.Y = y;
+            this.Id = id;
             var t = (RectTransform)this.transform;
             t.anchorMin = Vector2.up;
             t.anchorMax = Vector2.up;

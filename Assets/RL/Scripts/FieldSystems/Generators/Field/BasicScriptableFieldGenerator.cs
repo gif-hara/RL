@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using RL.FieldSystems;
+using RL.FieldSystems.Generators.Aisle;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -26,6 +27,9 @@ namespace RL.FieldSystems.Generators.Field
         [SerializeField]
         private Point offsetSize;
 
+        [SerializeField]
+        private ScriptableAisleGenerator aisleGenerator;
+
 #if UNITY_EDITOR
         void OnValidate()
         {
@@ -36,8 +40,8 @@ namespace RL.FieldSystems.Generators.Field
 
         public override void Generate()
         {
+            // 部屋を作成
             FieldController.RoomMatrix.Clear();
-
             var horizontal = Random.Range(this.roomMin.x, this.roomMax.x + 1);
             var vertical = Random.Range(this.roomMin.y, this.roomMax.y + 1);
             var horizontalSize = FieldController.XMax / horizontal;
@@ -49,6 +53,7 @@ namespace RL.FieldSystems.Generators.Field
                 for (var x = 0; x < horizontal; x++)
                 {
                     var room = new Room(
+                        new Point(x, y),
                         new Point(x * horizontalSize, y * verticalSize),
                         new Point(horizontalSize, verticalSize),
                         this.paddingMin,
@@ -58,6 +63,9 @@ namespace RL.FieldSystems.Generators.Field
                     rooms.Add(room);
                 }
             }
+
+            // 通路を作成
+            this.aisleGenerator.Generate();
         }
     }
 }
