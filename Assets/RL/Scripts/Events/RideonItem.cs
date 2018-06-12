@@ -5,9 +5,9 @@ using HK.Framework.EventSystems;
 namespace RL.Events.FieldSystems
 {
     /// <summary>
-    /// アイテムを取得した際のイベント
+    /// アイテムの上に乗った際のイベント
     /// </summary>
-    public sealed class AcquireItem : Message<AcquireItem, int>
+    public sealed class RideonItem : Message<RideonItem, int>
     {
         /// <summary>
         /// アイテムID

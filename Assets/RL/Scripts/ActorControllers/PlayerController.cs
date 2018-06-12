@@ -33,10 +33,10 @@ namespace RL.ActorControllers
                 })
                 .AddTo(this);
 
-            this.actor.Broker.Receive<AcquireItem>()
+            this.actor.Broker.Receive<RideonItem>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    Debug.Log($"TODO AcquireItem itemId = {x.ItemId} cellId = {this.actor.CellController.Id}");
+                    Debug.Log($"TODO Rideon Item itemId = {x.ItemId} cellId = {this.actor.CellController.Id}");
                     _this.actor.CellController.ClearEvent();
                 })
                 .AddTo(this);

@@ -79,7 +79,7 @@ namespace RL.FieldSystems.Generators.Field
                 var rooms = roomMatrix[Random.Range(0, roomMatrix.Count)];
                 var room = rooms[Random.Range(0, rooms.Count)];
                 var cell = room.Cells[Random.Range(0, room.Cells.Length)];
-                var acquireItemEvent = new AcquireItem(0);
+                var acquireItemEvent = new Item(0);
                 cell.RegisterEvent(acquireItemEvent);
             }
         }

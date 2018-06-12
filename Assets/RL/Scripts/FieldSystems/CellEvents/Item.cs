@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+﻿using RL.Events.FieldSystems;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace RL.FieldSystems.CellEvents
 {
     /// <summary>
-    /// アイテムを取得するセルイベント
+    /// アイテムが存在するセルイベント
     /// </summary>
-    public sealed class AcquireItem : CellEvent
+    public sealed class Item : CellEvent
     {
         private readonly int itemId;
 
-        public AcquireItem(int itemId)
+        public Item(int itemId)
         {
             this.itemId = itemId;
         }
@@ -23,7 +24,7 @@ namespace RL.FieldSystems.CellEvents
 
         public override void Invoke()
         {
-            this.owner.RideActor.Broker.Publish(Events.FieldSystems.AcquireItem.Get(this.itemId));
+            this.owner.RideActor.Broker.Publish(RideonItem.Get(this.itemId));
         }
     }
 }
