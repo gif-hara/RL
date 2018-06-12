@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RL.ActorControllers;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
@@ -28,6 +29,11 @@ namespace RL.FieldSystems
         /// </summary>
         public bool CanMove { get; private set; } = true;
 
+        /// <summary>
+        /// このセルに乗っかっている<see cref="Actor"/>
+        /// </summary>
+        public Actor RideActor { get; private set; }
+
         public void Initialize(Point id, Vector2 position, float size)
         {
             this.Id = id;
@@ -43,6 +49,21 @@ namespace RL.FieldSystems
         {
             this.CanMove = value;
             this.movableImage.color = this.CanMove ? this.movableColor : this.notMovableColor;
+        }
+
+        public void Ride(Actor actor)
+        {
+            this.RideActor = actor;
+        }
+
+        public void Leave(Actor actor)
+        {
+            if(this.RideActor == null)
+            {
+                return;
+            }
+            Assert.AreEqual(actor, this.RideActor);
+            this.RideActor = null;
         }
     }
 }

@@ -37,8 +37,10 @@ namespace RL.ActorControllers
         public void SetPosition(Point id)
         {
             Assert.IsTrue(FieldController.Cells[id.y, id.x].CanMove, $"移動できないセルに移動しました id = {id}");
+            FieldController.Cells[this.Id.y, this.Id.x].Leave(this);
             this.Id = id;
             this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
+            FieldController.Cells[this.Id.y, this.Id.x].Ride(this);
         }
 
         public void SetPositionFromRandomRoom()
@@ -46,7 +48,7 @@ namespace RL.ActorControllers
             var rooms = FieldController.AllRoom;
             var room = rooms[Random.Range(0, rooms.Count)];
             var cell = room.Cells[Random.Range(0, room.Cells.Length)];
-            this.Move(cell.Id, true);
+            this.SetPosition(cell.Id);
         }
 
         public void Move(Point nextId, bool isForce)
