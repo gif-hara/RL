@@ -8,9 +8,9 @@ namespace RL.ActorControllers
     /// <summary>
     /// キャラクターの根底部分を司るクラス
     /// </summary>
-    public class Actor : MonoBehaviour
+    public sealed class Actor : MonoBehaviour
     {
-        protected RectTransform cachedTransform;
+        private RectTransform cachedTransform;
 
         public Point Id { get; private set; }
 
@@ -18,9 +18,15 @@ namespace RL.ActorControllers
 
         public static Actor Player { get; set; }
 
-        protected virtual void Awake()
+        void Awake()
         {
             this.cachedTransform = (RectTransform)this.transform;
+            Instances.Add(this);
+        }
+
+        void OnDestroy()
+        {
+            Instances.Remove(this);
         }
 
         public void Initialize(float size)
