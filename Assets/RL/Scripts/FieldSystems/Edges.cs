@@ -26,16 +26,16 @@ namespace RL.FieldSystems
             for (var i = 0; i < cells.Length; i++)
             {
                 var cell = cells[i];
-                min.x = Mathf.Min(min.x, cell.X);
-                min.y = Mathf.Min(min.y, cell.Y);
-                max.x = Mathf.Max(max.x, cell.X);
-                max.y = Mathf.Max(max.y, cell.Y);
+                min.x = Mathf.Min(min.x, cell.Id.x);
+                min.y = Mathf.Min(min.y, cell.Id.y);
+                max.x = Mathf.Max(max.x, cell.Id.x);
+                max.y = Mathf.Max(max.y, cell.Id.y);
             }
 
-            this.Left = new Edge(Array.FindAll(cells, c => c.X == min.x));
-            this.Top = new Edge(Array.FindAll(cells, c => c.Y == min.y));
-            this.Right = new Edge(Array.FindAll(cells, c => c.X == max.x));
-            this.Bottom = new Edge(Array.FindAll(cells, c => c.Y == max.y));
+            this.Left = new Edge(Array.FindAll(cells, c => c.Id.x == min.x));
+            this.Top = new Edge(Array.FindAll(cells, c => c.Id.y == min.y));
+            this.Right = new Edge(Array.FindAll(cells, c => c.Id.x == max.x));
+            this.Bottom = new Edge(Array.FindAll(cells, c => c.Id.y == max.y));
         }
 
         public Edge GetFromDirection(Direction direction)

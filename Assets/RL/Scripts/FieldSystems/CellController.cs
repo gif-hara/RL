@@ -23,10 +23,6 @@ namespace RL.FieldSystems
 
         public Point Id { get; private set; }
 
-        public int X { get { return this.Id.x; } }
-
-        public int Y { get { return this.Id.y; } }
-
         /// <summary>
         /// 移動可能か
         /// </summary>
