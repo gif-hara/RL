@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using HK.Framework.EventSystems;
+using RL.Events.FieldSystems;
 using RL.Extensions;
 using RL.FieldSystems.Generators.Field;
 using RL.GameSystems;
@@ -60,6 +62,7 @@ namespace RL.FieldSystems
                 }
             }
             generator.Generate();
+            Broker.Global.Publish(GeneratedField.Get());
         }
 
         public static Vector2 GetPosition(Point id)

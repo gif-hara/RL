@@ -1,5 +1,8 @@
-﻿using RL.FieldSystems;
+﻿using HK.Framework.EventSystems;
+using RL.Events.FieldSystems;
+using RL.FieldSystems;
 using RL.GameSystems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -22,6 +25,13 @@ namespace RL.ActorControllers
 
             Assert.IsNull(Actor.Player, $"すでにPlayerが存在します");
             Actor.Player = this.actor;
+
+            Broker.Global.Receive<GeneratedField>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.actor.SetPositionFromRandomRoom();
+                })
+                .AddTo(this);
         }
 
         void Update()
