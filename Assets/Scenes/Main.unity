@@ -383,6 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 975540487}
   - component: {fileID: 975540486}
+  - component: {fileID: 975540488}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -403,10 +404,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiSizeAdjuster: {fileID: 517987450}
   fieldController: {fileID: 1769088160}
-  playerPrefab: {fileID: 114118991521064298, guid: 6bee90eb38a8a405a8b28fd8c42bbe9f,
-    type: 2}
   fieldTransform: {fileID: 201446314}
   fieldGenerator: {fileID: 11400000, guid: 96277c740fecd4e3ab49927840061f08, type: 2}
+  actorSpawner: {fileID: 975540488}
 --- !u!4 &975540487
 Transform:
   m_ObjectHideFlags: 0
@@ -420,6 +420,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975540488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 975540485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb13fd7f527104850b081b670490f7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorParent: {fileID: 201446314}
+  prefab: {fileID: 114176701545805004, guid: 6bee90eb38a8a405a8b28fd8c42bbe9f, type: 2}
 --- !u!1 &1050739677
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +466,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1920, y: 0}
-  m_SizeDelta: {x: 1488, y: 1920}
+  m_SizeDelta: {x: 1492.7615, y: 1920}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1050739679
 MonoBehaviour:

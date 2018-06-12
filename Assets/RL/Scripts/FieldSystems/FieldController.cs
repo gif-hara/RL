@@ -60,7 +60,6 @@ namespace RL.FieldSystems
                 }
             }
             generator.Generate();
-            GameController.Instance.PlayerController.SetPositionFromRandomRoom();
         }
 
         public static Vector2 GetPosition(Point id)

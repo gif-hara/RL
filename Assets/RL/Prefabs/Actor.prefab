@@ -36,15 +36,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224631928802072480}
-  - component: {fileID: 114118991521064298}
+  - component: {fileID: 114176701545805004}
   m_Layer: 5
-  m_Name: Player
+  m_Name: Actor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114118991521064298
+--- !u!114 &114176701545805004
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1779714312754454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c39a9a278a347c0ad6bee654ee58b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a2019043b6a04aeb94496093a36081a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114546638420942344

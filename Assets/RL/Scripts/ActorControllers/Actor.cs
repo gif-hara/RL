@@ -1,4 +1,5 @@
-﻿using RL.FieldSystems;
+﻿using System.Collections.Generic;
+using RL.FieldSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -11,7 +12,11 @@ namespace RL.ActorControllers
     {
         protected RectTransform cachedTransform;
 
-        protected Point Id { get; private set; }
+        public Point Id { get; private set; }
+
+        public static readonly List<Actor> Instances = new List<Actor>();
+
+        public static Actor Player { get; set; }
 
         protected virtual void Awake()
         {
@@ -38,7 +43,7 @@ namespace RL.ActorControllers
             this.Move(cell.Id, true);
         }
 
-        protected void Move(Point nextId, bool isForce)
+        public void Move(Point nextId, bool isForce)
         {
             if (isForce || FieldController.CanMove(this.Id, nextId))
             {

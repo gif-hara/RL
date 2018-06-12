@@ -1,4 +1,5 @@
 ﻿using RL.FieldSystems;
+using RL.GameSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -7,8 +8,22 @@ namespace RL.ActorControllers
     /// <summary>
     /// 
     /// </summary>
-    public sealed class PlayerController : Actor
+    public sealed class PlayerController : MonoBehaviour
     {
+        private Actor actor;
+
+        void Awake()
+        {
+            Assert.IsNull(GameController.Instance.PlayerController, $"すでに{typeof(PlayerController).Name}が存在します");
+            GameController.Instance.PlayerController = this;
+
+            this.actor = this.GetComponent<Actor>();
+            Assert.IsNotNull(this.actor);
+
+            Assert.IsNull(Actor.Player, $"すでにPlayerが存在します");
+            Actor.Player = this.actor;
+        }
+
         void Update()
         {
             int x = 0, y = 0;
@@ -32,7 +47,7 @@ namespace RL.ActorControllers
 
             if (x != 0 || y != 0)
             {
-                this.Move(this.Id + new Point(x, y), false);
+                this.actor.Move(this.actor.Id + new Point(x, y), false);
             }
         }
 

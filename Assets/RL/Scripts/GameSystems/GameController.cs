@@ -22,14 +22,15 @@ namespace RL.GameSystems
         public FieldController FieldController { get { return this.fieldController; } }
 
         [SerializeField]
-        private PlayerController playerPrefab;
-        public PlayerController PlayerController { get; private set; }
-
-        [SerializeField]
         private RectTransform fieldTransform;
 
         [SerializeField]
         private ScriptableFieldGenerator fieldGenerator;
+
+        [SerializeField]
+        private ActorSpawner actorSpawner;
+
+        public PlayerController PlayerController { get; set; }
 
         void Awake()
         {
@@ -40,8 +41,7 @@ namespace RL.GameSystems
         {
             this.uiSizeAdjuster.Adjust();
             this.fieldController.CreateCells();
-            this.PlayerController = Instantiate(this.playerPrefab, this.fieldTransform);
-            this.PlayerController.Initialize(FieldController.Size);
+            this.actorSpawner.SpawnPlayer();
             this.fieldController.GenerateField(this.fieldGenerator);
         }
 
