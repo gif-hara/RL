@@ -1,4 +1,5 @@
-﻿using RL.FieldSystems;
+﻿using RL.ActorControllers;
+using RL.FieldSystems;
 using RL.FieldSystems.Generators.Field;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -39,10 +40,9 @@ namespace RL.GameSystems
         {
             this.uiSizeAdjuster.Adjust();
             this.fieldController.CreateCells();
-            this.fieldController.GenerateField(this.fieldGenerator);
             this.PlayerController = Instantiate(this.playerPrefab, this.fieldTransform);
             this.PlayerController.Initialize(FieldController.Size);
-            this.PlayerController.SetPositionFromRandomRoom();
+            this.fieldController.GenerateField(this.fieldGenerator);
         }
 
         void Update()
@@ -56,7 +56,6 @@ namespace RL.GameSystems
         private void GenerateField()
         {
             this.fieldController.GenerateField(this.fieldGenerator);
-            this.PlayerController.SetPositionFromRandomRoom();
         }
     }
 }

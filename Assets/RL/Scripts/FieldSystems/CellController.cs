@@ -5,12 +5,15 @@ using UnityEngine.UI;
 namespace RL.FieldSystems
 {
     /// <summary>
-    /// 
+    /// セルを制御するクラス
     /// </summary>
     public sealed class CellController : MonoBehaviour
     {
         [SerializeField]
-        private Image image;
+        private Image movableImage;
+
+        [SerializeField]
+        private Image eventImage;
 
         [SerializeField]
         private Color movableColor;
@@ -43,7 +46,7 @@ namespace RL.FieldSystems
         public void SetCanMove(bool value)
         {
             this.CanMove = value;
-            this.image.color = this.CanMove ? this.movableColor : this.notMovableColor;
+            this.movableImage.color = this.CanMove ? this.movableColor : this.notMovableColor;
         }
     }
 }
