@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using HK.Framework.EventSystems;
 using RL.FieldSystems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,6 +16,8 @@ namespace RL.ActorControllers
 
         public Point Id { get; private set; }
 
+        public IMessageBroker Broker { get; private set; }
+
         public static readonly List<Actor> Instances = new List<Actor>();
 
         public static Actor Player { get; set; }
@@ -22,6 +26,8 @@ namespace RL.ActorControllers
         {
             this.cachedTransform = (RectTransform)this.transform;
             Instances.Add(this);
+
+            this.Broker = HK.Framework.EventSystems.Broker.GetGameObjectBroker(this.gameObject);
         }
 
         void OnDestroy()
@@ -40,7 +46,7 @@ namespace RL.ActorControllers
             FieldController.Cells[this.Id.y, this.Id.x].Leave(this);
             this.Id = id;
             this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
-            FieldController.Cells[this.Id.y, this.Id.x].Ride(this);
+            this.CellController.Ride(this);
         }
 
         public void SetPositionFromRandomRoom()
@@ -56,6 +62,17 @@ namespace RL.ActorControllers
             if (isForce || FieldController.CanMove(this.Id, nextId))
             {
                 this.SetPosition(nextId);
+            }
+        }
+
+        /// <summary>
+        /// 今乗っているセルを返す
+        /// </summary>
+        public CellController CellController
+        {
+            get
+            {
+                return FieldController.Cells[this.Id.y, this.Id.x];
             }
         }
     }

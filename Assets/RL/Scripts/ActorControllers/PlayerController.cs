@@ -32,6 +32,14 @@ namespace RL.ActorControllers
                     _this.actor.SetPositionFromRandomRoom();
                 })
                 .AddTo(this);
+
+            this.actor.Broker.Receive<AcquireItem>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    Debug.Log($"TODO AcquireItem itemId = {x.ItemId} cellId = {this.actor.CellController.Id}");
+                    _this.actor.CellController.ClearEvent();
+                })
+                .AddTo(this);
         }
 
         void Update()

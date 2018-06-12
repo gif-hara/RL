@@ -26,4 +26,7 @@ MonoBehaviour:
   offsetSize:
     x: 0
     y: 0
+  itemNumber:
+    x: 2
+    y: 4
   aisleGenerator: {fileID: 11400000, guid: f33879ed2cd194359a300a83f3f08017, type: 2}

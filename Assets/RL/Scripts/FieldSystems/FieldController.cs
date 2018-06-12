@@ -58,9 +58,11 @@ namespace RL.FieldSystems
             {
                 for (int x = 0; x < this.matrixNumber; x++)
                 {
-                    this.cells[y, x].SetCanMove(false);
+                    this.cells[y, x].Clear();
                 }
             }
+            
+            RoomMatrix.Clear();
             generator.Generate();
             Broker.Global.Publish(GeneratedField.Get());
         }

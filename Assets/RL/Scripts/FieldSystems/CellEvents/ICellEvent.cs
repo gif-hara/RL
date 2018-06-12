@@ -8,6 +8,8 @@ namespace RL.FieldSystems.CellEvents
     /// </summary>
     public interface ICellEvent
     {
+        void Initialize(CellController owner);
+
         void Invoke();
     }
 }
