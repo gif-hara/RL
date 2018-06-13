@@ -49,5 +49,23 @@ namespace RL.FieldSystems
 
             this.Edges = new Edges(this.Cells);
         }
+
+        /// <summary>
+        /// この部屋に存在する<see cref="Actor"/>の数を返す
+        /// </summary>
+        /// <returns></returns>
+        public int ExistActorNumber
+        {
+            get
+            {
+                var result = 0;
+                for(var i = 0; i < this.Cells.Length; ++i)
+                {
+                    result += this.Cells[i].RideActor == null ? 0 : 1;
+                }
+
+                return result;
+            }
+        }
     }
 }

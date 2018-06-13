@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HK.Framework.EventSystems;
+using RL.ActorControllers;
 using RL.Events.FieldSystems;
 using RL.Extensions;
 using RL.FieldSystems.Generators.Field;
@@ -64,6 +65,7 @@ namespace RL.FieldSystems
                 }
             }
 
+            Actor.ClearEnemies();
             ClearRoom();
             generator.Generate();
             Broker.Global.Publish(GeneratedField.Get());
@@ -144,6 +146,23 @@ namespace RL.FieldSystems
             {
                 var room = AllRoom[Random.Range(0, AllRoom.Count)];
                 return room.Cells[Random.Range(0, room.Cells.Length)];
+            }
+        }
+
+        /// <summary>
+        /// <see cref="Actor"/>が乗っていないセルを返す
+        /// </summary>
+        public static CellController RandomCellNotRideActor
+        {
+            get
+            {
+                // Actorで埋まっていない部屋を取得する
+                var possibleRooms = AllRoom.Where(r => r.ExistActorNumber != r.Cells.Length);
+                Assert.AreNotEqual(possibleRooms.Count(), 0, $"{typeof(Actor).Name}が存在しない{typeof(Room).Name}の取得に失敗しました　");
+                
+                var room = possibleRooms.ElementAt(Random.Range(0, possibleRooms.Count()));
+                var cells = room.Cells.Where(c => c.RideActor == null);
+                return cells.ElementAt(Random.Range(0, cells.Count()));
             }
         }
 

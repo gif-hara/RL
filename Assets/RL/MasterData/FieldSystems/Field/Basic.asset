@@ -29,4 +29,21 @@ MonoBehaviour:
   itemNumber:
     x: 2
     y: 4
+  enemyNumber:
+    x: 30
+    y: 30
+  enemyTable:
+    elements:
+    - specId: 1
+      weight: 100
+    - specId: 2
+      weight: 50
+    - specId: 3
+      weight: 10
+    - specId: 4
+      weight: 80
+    - specId: 5
+      weight: 30
+    - specId: 6
+      weight: 5
   aisleGenerator: {fileID: 11400000, guid: f33879ed2cd194359a300a83f3f08017, type: 2}

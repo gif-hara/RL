@@ -37,6 +37,9 @@ namespace RL.FieldSystems.Generators.Field
         private Point enemyNumber;
 
         [SerializeField]
+        private EnemyTable enemyTable;
+
+        [SerializeField]
         private ScriptableAisleGenerator aisleGenerator;
 
 #if UNITY_EDITOR
@@ -95,7 +98,8 @@ namespace RL.FieldSystems.Generators.Field
             var randomEnemyNumber = Random.Range(this.enemyNumber.x, this.enemyNumber.y + 1);
             for(var i = 0; i < randomEnemyNumber; ++i)
             {
-                actorSpawner.SpawnEnemy(ActorSpecDatabase.Get[1], FieldController.RandomPosition);
+                var specId = this.enemyTable.Lottery.specId;
+                actorSpawner.SpawnEnemy(ActorSpecDatabase.Get[specId], FieldController.RandomCellNotRideActor.Id);
             }
         }
     }

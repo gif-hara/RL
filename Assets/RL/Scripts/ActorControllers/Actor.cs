@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using HK.Framework.EventSystems;
 using RL.FieldSystems;
 using UniRx;
@@ -35,6 +36,8 @@ namespace RL.ActorControllers
 
         public static Actor Player { get; set; }
 
+        public static List<Actor> Enemies = new List<Actor>();
+
         void Awake()
         {
             this.cachedTransform = (RectTransform)this.transform;
@@ -66,8 +69,8 @@ namespace RL.ActorControllers
         }
 
         public void SetPositionFromRandomRoom()
-        {
-            this.SetPosition(FieldController.RandomPosition);
+        {            
+            this.SetPosition(FieldController.RandomCellNotRideActor.Id);
         }
 
         public void Move(Point nextId, bool isForce)
@@ -87,6 +90,16 @@ namespace RL.ActorControllers
             {
                 return FieldController.Cells[this.Id.y, this.Id.x];
             }
+        }
+
+        public static void ClearEnemies()
+        {
+            for(var i = 0; i < Enemies.Count; ++i)
+            {
+                var enemy = Enemies[i];
+                Destroy(enemy.gameObject);
+            }
+            Enemies.Clear();
         }
     }
 }

@@ -51,7 +51,10 @@ namespace RL.FieldSystems
 
         public void Clear()
         {
-            this.RideActor = null;
+            if(this.RideActor != Actor.Player)
+            {
+                this.RideActor = null;
+            }
             this.SetCanMove(false);
             this.ClearEvent();
         }
@@ -76,6 +79,7 @@ namespace RL.FieldSystems
 
         public void Ride(Actor actor)
         {
+            Assert.IsNull(this.RideActor, $"既に{typeof(Actor).Name}が存在します Id = {this.Id}");
             this.RideActor = actor;
             if(this.cellEvent != null)
             {
@@ -89,7 +93,7 @@ namespace RL.FieldSystems
             {
                 return;
             }
-            Assert.AreEqual(actor, this.RideActor);
+            Assert.AreEqual(actor, this.RideActor, $"別の{typeof(Actor).Name}がLeaveしました Id = {this.Id}");
             this.RideActor = null;
         }
     }
