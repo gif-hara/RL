@@ -4,6 +4,7 @@ using RL.FieldSystems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace RL.ActorControllers
 {
@@ -12,6 +13,16 @@ namespace RL.ActorControllers
     /// </summary>
     public sealed class Actor : MonoBehaviour
     {
+        [SerializeField]
+        private RawImage image;
+        public RawImage Image
+        {
+            get
+            {
+                return this.image;
+            }
+        }
+
         private RectTransform cachedTransform;
 
         public Point Id { get; private set; }
@@ -43,7 +54,7 @@ namespace RL.ActorControllers
         public void SetPosition(Point id)
         {
             Assert.IsTrue(FieldController.Cells[id.y, id.x].CanMove, $"移動できないセルに移動しました id = {id}");
-            FieldController.Cells[this.Id.y, this.Id.x].Leave(this);
+            this.CellController.Leave(this);
             this.Id = id;
             this.cachedTransform.anchoredPosition = FieldController.GetPosition(this.Id);
             this.CellController.Ride(this);
@@ -51,10 +62,7 @@ namespace RL.ActorControllers
 
         public void SetPositionFromRandomRoom()
         {
-            var rooms = FieldController.AllRoom;
-            var room = rooms[Random.Range(0, rooms.Count)];
-            var cell = room.Cells[Random.Range(0, room.Cells.Length)];
-            this.SetPosition(cell.Id);
+            this.SetPosition(FieldController.RandomPosition);
         }
 
         public void Move(Point nextId, bool isForce)
