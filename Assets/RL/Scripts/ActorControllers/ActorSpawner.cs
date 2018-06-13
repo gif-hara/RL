@@ -21,6 +21,11 @@ namespace RL.ActorControllers
             actor.gameObject.AddComponent<PlayerController>();
         }
 
+        public void SpawnEnemy()
+        {
+            
+        }
+
         private Actor Spawn
         {
             get

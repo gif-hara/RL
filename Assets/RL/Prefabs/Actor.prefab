@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2019043b6a04aeb94496093a36081a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 114546638420942344}
 --- !u!114 &114546638420942344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,8 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.36008072, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
