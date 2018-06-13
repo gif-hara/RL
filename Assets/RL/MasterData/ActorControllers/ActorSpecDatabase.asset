@@ -14,15 +14,50 @@ MonoBehaviour:
   Specs:
   - Texture: {fileID: 0}
     Color: {r: 0, g: 0.757931, b: 1, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1
   - Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
     Color: {r: 0.15534878, g: 0, b: 1, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1
   - Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
     Color: {r: 0.8441864, g: 0, b: 0.8679245, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1
   - Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
     Color: {r: 0.8679245, g: 0, b: 0.054868553, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1
   - Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
     Color: {r: 0.15534878, g: 0, b: 1, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1
   - Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
     Color: {r: 0.8441864, g: 0, b: 0.8679245, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1
   - Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
     Color: {r: 0.8679245, g: 0, b: 0.054868553, a: 1}
+    Parameter:
+      HitPoint: 10
+      Strength: 1
+      Defence: 0
+      Speed: 1

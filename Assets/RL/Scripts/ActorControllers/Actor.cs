@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HK.Framework.EventSystems;
+using RL.Events.ActorControllers;
 using RL.FieldSystems;
+using RL.GameSystems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -32,6 +34,8 @@ namespace RL.ActorControllers
 
         public ActorSpec Spec { get; private set; }
 
+        public ActorParameter CurrentParameter { get; private set; }
+
         public static readonly List<Actor> Instances = new List<Actor>();
 
         public static Actor Player { get; set; }
@@ -55,6 +59,7 @@ namespace RL.ActorControllers
         {
             this.cachedTransform.sizeDelta = Vector2.one * size;
             this.Spec = spec;
+            this.CurrentParameter = new ActorParameter(this.Spec.Parameter);
             this.image.texture = this.Spec.Texture;
             this.image.color = this.Spec.Color;
         }
@@ -83,13 +88,25 @@ namespace RL.ActorControllers
         /// </remarks>
         public void NextPosition(Point nextId)
         {
-            if(FieldController.Cells[nextId.y, nextId.x].RideActor)
+            var targetActor = FieldController.Cells[nextId.y, nextId.x].RideActor;
+            if(targetActor)
             {
-                Debug.Log("Attack");
+                targetActor.TakeDamage(Calculator.GetDamageFtomAttack(this, targetActor), this);
             }
             else if (FieldController.CanMove(this.Id, nextId))
             {
                 this.SetPosition(nextId);
+            }
+        }
+
+        public void TakeDamage(int damage, Actor attacker)
+        {
+            this.CurrentParameter.HitPoint -= damage;
+            if(this.IsDead)
+            {
+                this.CellController.Leave(this);
+                Destroy(this.gameObject);
+                HK.Framework.EventSystems.Broker.Global.Publish(DiedActor.Get(this, attacker));
             }
         }
 
@@ -101,6 +118,14 @@ namespace RL.ActorControllers
             get
             {
                 return FieldController.Cells[this.Id.y, this.Id.x];
+            }
+        }
+
+        public bool IsDead
+        {
+            get
+            {
+                return this.CurrentParameter.HitPoint <= 0;
             }
         }
 
