@@ -17,23 +17,20 @@ namespace RL.ActorControllers
 
         public void SpawnPlayer()
         {
-            var actor = this.Spawn;
+            var actor = this.Spawn(ActorSpecDatabase.Get[0]);
             actor.gameObject.AddComponent<PlayerController>();
         }
 
         public void SpawnEnemy()
         {
-            
+
         }
 
-        private Actor Spawn
+        private Actor Spawn(ActorSpec spec)
         {
-            get
-            {
-                var actor = Instantiate(this.prefab, this.actorParent);
-                actor.Initialize(FieldController.Size);
-                return actor;
-            }
+            var actor = Instantiate(this.prefab, this.actorParent);
+            actor.Initialize(FieldController.Size, spec);
+            return actor;
         }
     }
 }

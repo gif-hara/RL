@@ -30,6 +30,10 @@ namespace RL.GameSystems
         [SerializeField]
         private ActorSpawner actorSpawner;
 
+        [SerializeField]
+        private ActorSpecDatabase actorSpecDatabase;
+        public ActorSpecDatabase ActorSpecDatabase{ get { return this.actorSpecDatabase; } }
+
         public PlayerController PlayerController { get; set; }
 
         void Awake()

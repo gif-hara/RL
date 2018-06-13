@@ -29,6 +29,8 @@ namespace RL.ActorControllers
 
         public IMessageBroker Broker { get; private set; }
 
+        public ActorSpec Spec { get; private set; }
+
         public static readonly List<Actor> Instances = new List<Actor>();
 
         public static Actor Player { get; set; }
@@ -46,9 +48,12 @@ namespace RL.ActorControllers
             Instances.Remove(this);
         }
 
-        public void Initialize(float size)
+        public void Initialize(float size, ActorSpec spec)
         {
             this.cachedTransform.sizeDelta = Vector2.one * size;
+            this.Spec = spec;
+            this.image.texture = this.Spec.Texture;
+            this.image.color = this.Spec.Color;
         }
 
         public void SetPosition(Point id)

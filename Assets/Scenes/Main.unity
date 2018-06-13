@@ -407,6 +407,7 @@ MonoBehaviour:
   fieldTransform: {fileID: 201446314}
   fieldGenerator: {fileID: 11400000, guid: 96277c740fecd4e3ab49927840061f08, type: 2}
   actorSpawner: {fileID: 975540488}
+  actorSpecDatabase: {fileID: 11400000, guid: ce4904721b7114b26bbecfc55950008b, type: 2}
 --- !u!4 &975540487
 Transform:
   m_ObjectHideFlags: 0
