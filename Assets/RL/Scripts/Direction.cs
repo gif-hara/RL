@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.Assertions;
-
-namespace RL.GameSystems
+﻿namespace RL
 {
+    /// <summary>
+    /// 方向タイプ
+    /// </summary>
     public enum Direction
     {
         /// <summary>

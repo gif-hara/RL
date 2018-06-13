@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.Assertions;
-
-namespace RL
+﻿namespace RL
 {
     /// <summary>
     /// 抽選を行えるインターフェイス
