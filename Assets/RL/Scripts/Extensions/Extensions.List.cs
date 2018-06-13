@@ -24,14 +24,14 @@ namespace RL.Extensions
             for(var i = 0; i < self.Count; ++i)
             {
                 var t = self[i];
-                if(current >= r && r < current + t.Weight)
+                if(current <= r && r < current + t.Weight)
                 {
                     return t;
                 }
                 current += t.Weight;
             }
 
-            Assert.IsTrue(false, "未定義の動作です");
+            Assert.IsTrue(false, $"未定義の動作です max = {max}, r = {r}");
             return default(T);
         }
     }
