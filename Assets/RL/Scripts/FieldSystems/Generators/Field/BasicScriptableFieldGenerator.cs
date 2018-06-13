@@ -94,6 +94,7 @@ namespace RL.FieldSystems.Generators.Field
             }
 
             // エネミーを生成
+            // TODO: Actorを配置していないセルを予めキャッシュしたほうが効率良さそう
             var actorSpawner = GameController.Instance.ActorSpawner;
             var randomEnemyNumber = Random.Range(this.enemyNumber.x, this.enemyNumber.y + 1);
             for(var i = 0; i < randomEnemyNumber; ++i)
