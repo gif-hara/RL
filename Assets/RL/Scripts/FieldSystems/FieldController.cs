@@ -25,6 +25,8 @@ namespace RL.FieldSystems
 
         private readonly List<List<Room>> roomMatrix = new List<List<Room>>();
 
+        private readonly List<Room> allRoom = new List<Room>();
+
         private float size;
 
         public void CreateCells()
@@ -61,10 +63,16 @@ namespace RL.FieldSystems
                     this.cells[y, x].Clear();
                 }
             }
-            
-            RoomMatrix.Clear();
+
+            ClearRoom();
             generator.Generate();
             Broker.Global.Publish(GeneratedField.Get());
+        }
+
+        public static void ClearRoom()
+        {
+            RoomMatrix.Clear();
+            AllRoom.Clear();
         }
 
         public static Vector2 GetPosition(Point id)
@@ -126,9 +134,17 @@ namespace RL.FieldSystems
         {
             get
             {
-                var result = new List<Room>();
-                RoomMatrix.ForEach(r => result.AddRange(r));
-                return result;
+                return GameController.Instance.FieldController.allRoom;
+            }
+        }
+
+        public static Point RandomPosition
+        {
+            get
+            {
+                var room = AllRoom[Random.Range(0, AllRoom.Count)];
+                var cell = room.Cells[Random.Range(0, room.Cells.Length)];
+                return cell.Id;
             }
         }
 

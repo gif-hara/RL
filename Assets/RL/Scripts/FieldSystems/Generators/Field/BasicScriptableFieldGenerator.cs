@@ -45,6 +45,7 @@ namespace RL.FieldSystems.Generators.Field
         public override void Generate()
         {
             var roomMatrix = FieldController.RoomMatrix;
+            var allRoom = FieldController.AllRoom;
 
             // 部屋を作成
             var horizontal = Random.Range(this.roomMin.x, this.roomMax.x + 1);
@@ -66,6 +67,7 @@ namespace RL.FieldSystems.Generators.Field
                         this.offsetSize
                         );
                     rooms.Add(room);
+                    allRoom.Add(room);
                 }
             }
 
