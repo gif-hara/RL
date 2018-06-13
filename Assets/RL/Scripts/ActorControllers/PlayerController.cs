@@ -65,7 +65,7 @@ namespace RL.ActorControllers
 
             if (x != 0 || y != 0)
             {
-                this.actor.Move(this.actor.Id + new Point(x, y), false);
+                this.actor.NextPosition(this.actor.Id + new Point(x, y));
             }
         }
 

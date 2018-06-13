@@ -73,9 +73,21 @@ namespace RL.ActorControllers
             this.SetPosition(FieldController.RandomCellNotRideActor.Id);
         }
 
-        public void Move(Point nextId, bool isForce)
+        /// <summary>
+        /// 次移動する座標を更新する
+        /// </summary>
+        /// <remarks>
+        /// 移動先のセルに何かしらのイベントがある場合は様々な処理を実行する
+        /// 敵対する<see cref="Actor"/>の場合は攻撃を行う
+        /// 何もいない場合は移動して<see cref="CellEvent"/>を実行します
+        /// </remarks>
+        public void NextPosition(Point nextId)
         {
-            if (isForce || FieldController.CanMove(this.Id, nextId))
+            if(FieldController.Cells[nextId.y, nextId.x].RideActor)
+            {
+                Debug.Log("Attack");
+            }
+            else if (FieldController.CanMove(this.Id, nextId))
             {
                 this.SetPosition(nextId);
             }
