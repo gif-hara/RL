@@ -29,10 +29,11 @@ namespace RL.GameSystems
 
         [SerializeField]
         private ActorSpawner actorSpawner;
+        public ActorSpawner ActorSpawner { get { return this.actorSpawner; } }
 
         [SerializeField]
         private ActorSpecDatabase actorSpecDatabase;
-        public ActorSpecDatabase ActorSpecDatabase{ get { return this.actorSpecDatabase; } }
+        public ActorSpecDatabase ActorSpecDatabase { get { return this.actorSpecDatabase; } }
 
         public PlayerController PlayerController { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using RL.FieldSystems;
+﻿using HK.Framework.EventSystems;
+using RL.FieldSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -21,9 +22,11 @@ namespace RL.ActorControllers
             actor.gameObject.AddComponent<PlayerController>();
         }
 
-        public void SpawnEnemy()
+        public void SpawnEnemy(ActorSpec spec, Point position)
         {
-
+            var actor = this.Spawn(spec);
+            actor.SetPosition(position);
+            EnemyController.Create(actor);
         }
 
         private Actor Spawn(ActorSpec spec)

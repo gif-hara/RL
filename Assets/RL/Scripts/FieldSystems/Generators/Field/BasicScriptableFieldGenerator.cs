@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using RL.ActorControllers;
 using RL.FieldSystems;
 using RL.FieldSystems.CellEvents;
 using RL.FieldSystems.Generators.Aisle;
+using RL.GameSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,6 +32,9 @@ namespace RL.FieldSystems.Generators.Field
 
         [SerializeField]
         private Point itemNumber;
+
+        [SerializeField]
+        private Point enemyNumber;
 
         [SerializeField]
         private ScriptableAisleGenerator aisleGenerator;
@@ -83,6 +88,14 @@ namespace RL.FieldSystems.Generators.Field
                 var cell = room.Cells[Random.Range(0, room.Cells.Length)];
                 var acquireItemEvent = new Item(0);
                 cell.RegisterEvent(acquireItemEvent);
+            }
+
+            // エネミーを生成
+            var actorSpawner = GameController.Instance.ActorSpawner;
+            var randomEnemyNumber = Random.Range(this.enemyNumber.x, this.enemyNumber.y + 1);
+            for(var i = 0; i < randomEnemyNumber; ++i)
+            {
+                actorSpawner.SpawnEnemy(ActorSpecDatabase.Get[1], FieldController.RandomPosition);
             }
         }
     }

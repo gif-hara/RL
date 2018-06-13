@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace RL.ActorControllers
@@ -10,9 +11,18 @@ namespace RL.ActorControllers
     {
         private readonly Actor actor;
 
-        public EnemyController(Actor actor)
+        // TODO: 死亡したらRemoveする
+        public static readonly List<EnemyController> Instances = new List<EnemyController>();
+
+        private EnemyController(Actor actor)
         {
             this.actor = actor;
+            Instances.Add(this);
+        }
+
+        public static EnemyController Create(Actor actor)
+        {
+            return new EnemyController(actor);
         }
     }
 }

@@ -138,13 +138,20 @@ namespace RL.FieldSystems
             }
         }
 
-        public static Point RandomPosition
+        public static CellController RandomCell
         {
             get
             {
                 var room = AllRoom[Random.Range(0, AllRoom.Count)];
-                var cell = room.Cells[Random.Range(0, room.Cells.Length)];
-                return cell.Id;
+                return room.Cells[Random.Range(0, room.Cells.Length)];
+            }
+        }
+
+        public static Point RandomPosition
+        {
+            get
+            {
+                return RandomCell.Id;
             }
         }
 
