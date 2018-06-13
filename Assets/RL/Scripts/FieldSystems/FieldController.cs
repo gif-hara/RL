@@ -91,21 +91,29 @@ namespace RL.FieldSystems
                 return false;
             }
 
-            var diff = next - current;
+            return !IsExistCanNotMoveCell(current, next);
+        }
+
+        /// <summary>
+        /// <paramref name="from"/>から<paramref name="to"/>の間に移動不可能なセルが存在するか返す
+        /// </summary>
+        public static bool IsExistCanNotMoveCell(Point from, Point to)
+        {
+            var diff = to - from;
             var amount = diff.Abs;
             for (var y = 0; y <= amount.y; y++)
             {
                 for (var x = 0; x <= amount.x; x++)
                 {
-                    var targetId = current + (diff.Vertical * y) + (diff.Horizontal * x);
+                    var targetId = from + (diff.Vertical * y) + (diff.Horizontal * x);
                     if (!Cells[targetId.y, targetId.x].CanMove)
                     {
-                        return false;
+                        return true;
                     }
                 }
             }
 
-            return true;
+            return false;
         }
 
         public static float Size
@@ -159,7 +167,7 @@ namespace RL.FieldSystems
                 // Actorで埋まっていない部屋を取得する
                 var possibleRooms = AllRoom.Where(r => r.ExistActorNumber != r.Cells.Length);
                 Assert.AreNotEqual(possibleRooms.Count(), 0, $"{typeof(Actor).Name}が存在しない{typeof(Room).Name}の取得に失敗しました　");
-                
+
                 var room = possibleRooms.ElementAt(Random.Range(0, possibleRooms.Count()));
                 var cells = room.Cells.Where(c => c.RideActor == null);
                 return cells.ElementAt(Random.Range(0, cells.Count()));
