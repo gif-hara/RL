@@ -30,6 +30,8 @@ namespace RL.ActorControllers
 
         public Point Id { get; private set; }
 
+        public ActorType Type { get; private set; }
+
         public IMessageBroker Broker { get; private set; }
 
         public ActorSpec Spec { get; private set; }
@@ -55,8 +57,9 @@ namespace RL.ActorControllers
             Instances.Remove(this);
         }
 
-        public void Initialize(float size, ActorSpec spec)
+        public void Initialize(float size, ActorType type, ActorSpec spec)
         {
+            this.Type = type;
             this.cachedTransform.sizeDelta = Vector2.one * size;
             this.Spec = spec;
             this.CurrentParameter = new ActorParameter(this.Spec.Parameter);
@@ -91,7 +94,10 @@ namespace RL.ActorControllers
             var targetActor = FieldController.Cells[nextId.y, nextId.x].RideActor;
             if(targetActor)
             {
-                targetActor.TakeDamage(Calculator.GetDamageFtomAttack(this, targetActor), this);
+                if(this.IsOpponent(targetActor))
+                {
+                    targetActor.TakeDamage(Calculator.GetDamageFtomAttack(this, targetActor), this);
+                }
             }
             else if (FieldController.CanMove(this.Id, nextId))
             {
@@ -108,6 +114,24 @@ namespace RL.ActorControllers
                 Destroy(this.gameObject);
                 HK.Framework.EventSystems.Broker.Global.Publish(DiedActor.Get(this, attacker));
             }
+        }
+
+        /// <summary>
+        /// <paramref name="target"/>が敵対する対象であるか
+        /// </summary>
+        public bool IsOpponent(Actor target)
+        {
+            if(this.Type == ActorType.Player)
+            {
+                return target.Type == ActorType.Enemy;
+            }
+            else if(this.Type == ActorType.Enemy)
+            {
+                return target.Type == ActorType.Player;
+            }
+
+            Assert.IsTrue(false, $"未対応の値です this.Type = {this.Type}");
+            return false;
         }
 
         /// <summary>
