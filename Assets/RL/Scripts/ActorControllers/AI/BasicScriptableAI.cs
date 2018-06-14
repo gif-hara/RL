@@ -64,9 +64,18 @@ namespace RL.ActorControllers.AI
                 // 次の移動先が決まってない場合は決める
                 if (this.targetCell == null)
                 {
-                    // 自分がいるセルを除く入り口を取得する
-                    var entrances = cell.Room.Entrances.Where(e => e.CellController != cell);
-                    var entrance = entrances.ElementAt(Random.Range(0, entrances.Count()));
+                    Entrance entrance;
+                    if(cell.Room.Entrances.Count <= 1)
+                    {
+                        entrance = cell.Room.Entrances[0];
+                    }
+                    else
+                    {
+                        // 自分がいるセルを除く入り口を取得する
+                        var entrances = cell.Room.Entrances.Where(e => e.CellController != cell);
+                        entrance = entrances.Random();
+                    }
+                    
                     this.targetCell = entrance.AisleCell;
                 }
             }
