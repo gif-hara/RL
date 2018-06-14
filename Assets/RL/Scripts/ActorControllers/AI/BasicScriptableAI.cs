@@ -78,7 +78,8 @@ namespace RL.ActorControllers.AI
                 var movableCells = FieldController.GetCellCross(cell.Id, 1)
                     .Where(c => c.CanMove)
                     .Where(c => c.Id != cell.Id)
-                    .Where(c => c.Id != cell.Id + this.lastMoveDirection.Invert().ToPoint()); // 逆方向へは移動しない
+                    .Where(c => c.Id != cell.Id + this.lastMoveDirection.Invert().ToPoint()) // 逆方向へは移動しない
+                    .Where(c => c.RideActor == null);
                 this.targetCell = movableCells.ElementAt(Random.Range(0, movableCells.Count()));
             }
 
