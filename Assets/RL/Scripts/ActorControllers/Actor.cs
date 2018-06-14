@@ -89,7 +89,8 @@ namespace RL.ActorControllers
         /// 敵対する<see cref="Actor"/>の場合は攻撃を行う
         /// 何もいない場合は移動して<see cref="CellEvent"/>を実行します
         /// </remarks>
-        public void NextPosition(Point nextId)
+        /// <returns>何かしらの行動を行ったか返す</returns>
+        public bool NextPosition(Point nextId)
         {
             var targetActor = FieldController.Cells[nextId.y, nextId.x].RideActor;
             if(targetActor)
@@ -97,12 +98,19 @@ namespace RL.ActorControllers
                 if(this.IsOpponent(targetActor))
                 {
                     targetActor.TakeDamage(Calculator.GetDamageFtomAttack(this, targetActor), this);
+                    return true;
                 }
+
+                Assert.IsTrue(false, "targetActorに対して何もしませんでした");
+                return false;
             }
             else if (FieldController.CanMove(this.Id, nextId))
             {
                 this.SetPosition(nextId);
+                return true;
             }
+
+            return false;
         }
 
         public void TakeDamage(int damage, Actor attacker)
@@ -150,6 +158,14 @@ namespace RL.ActorControllers
             get
             {
                 return this.CurrentParameter.HitPoint <= 0;
+            }
+        }
+
+        public bool IsPlayer
+        {
+            get
+            {
+                return this.Type == ActorType.Player;
             }
         }
 

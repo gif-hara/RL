@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using HK.Framework.EventSystems;
+using RL.Events.ActorControllers;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -26,6 +28,13 @@ namespace RL.ActorControllers
                     Actor.Enemies.Remove(_this.actor);
                     Instances.Remove(_this);
                 });
+            Broker.Global.Receive<EndTurn>()
+                .Where(x => x.Actor.IsPlayer)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    Debug.Log("TODO: エネミーの行動処理");
+                })
+                .AddTo(this.actor);
         }
 
         public static EnemyController Create(Actor actor)

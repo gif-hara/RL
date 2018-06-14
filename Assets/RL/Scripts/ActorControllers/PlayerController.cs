@@ -1,4 +1,5 @@
 ﻿using HK.Framework.EventSystems;
+using RL.Events.ActorControllers;
 using RL.Events.FieldSystems;
 using RL.FieldSystems;
 using RL.GameSystems;
@@ -65,7 +66,11 @@ namespace RL.ActorControllers
 
             if (x != 0 || y != 0)
             {
-                this.actor.NextPosition(this.actor.Id + new Point(x, y));
+                var isAction = this.actor.NextPosition(this.actor.Id + new Point(x, y));
+                if(isAction)
+                {
+                    Broker.Global.Publish(EndTurn.Get(this.actor));
+                }
             }
         }
 
