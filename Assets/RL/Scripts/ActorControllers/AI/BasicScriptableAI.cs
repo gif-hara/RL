@@ -17,6 +17,8 @@ namespace RL.ActorControllers.AI
     [CreateAssetMenu(menuName = "RL/ActorControllers/AI/Basic")]
     public sealed class BasicScriptableAI : ScriptableAI
     {
+        private Actor targetActor;
+
         private CellController targetCell;
 
         private Direction lastMoveDirection;
@@ -36,6 +38,31 @@ namespace RL.ActorControllers.AI
             // 部屋にいるときの挙動
             if(cell.IsRoom)
             {
+                if(this.targetActor != null)
+                {
+                    // 狙っているアクターが別の部屋にいる場合は狙わなくなる
+                    if(this.targetActor.CellController.Room != cell.Room)
+                    {
+                        this.targetActor = null;
+                    }
+                    else
+                    {
+                        this.targetCell = this.targetActor.CellController;
+                    }
+                }
+                if(this.targetActor == null)
+                {
+                    var opponents = cell.Room.Cells
+                        .Where(c => c.RideActor != null)
+                        .Select(c => c.RideActor)
+                        .Where(a => this.actor.IsOpponent(a));
+                    if(opponents.Any())
+                    {
+                        this.targetActor = opponents.ElementAt(Random.Range(0, opponents.Count()));
+                        this.targetCell = this.targetActor.CellController;
+                    }
+                }
+
                 // 次の移動先が決まってない場合は決める
                 if (this.targetCell == null)
                 {
@@ -55,6 +82,7 @@ namespace RL.ActorControllers.AI
                 this.targetCell = movableCells.ElementAt(Random.Range(0, movableCells.Count()));
             }
 
+            // 目標のセルへ移動する
             var velocity = FieldController.GetTargetPointSign(cell.Id, this.targetCell.Id);
             this.lastMoveDirection = velocity.ToDirection();
             this.actor.NextPosition(cell.Id + velocity);
