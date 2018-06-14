@@ -36,6 +36,11 @@ namespace RL.FieldSystems
         /// </summary>
         public Actor RideActor { get; private set; }
 
+        /// <summary>
+        /// このセルを含んでいる部屋
+        /// </summary>
+        public Room Room { get; private set; }
+
         private ICellEvent cellEvent;
 
         public void Initialize(Point id, Vector2 position, float size)
@@ -55,6 +60,7 @@ namespace RL.FieldSystems
             {
                 this.RideActor = null;
             }
+            this.Room = null;
             this.SetCanMove(false);
             this.ClearEvent();
         }
@@ -69,6 +75,12 @@ namespace RL.FieldSystems
         {
             this.cellEvent = cellEvent;
             this.cellEvent.Initialize(this);
+        }
+
+        public void RegisterRoom(Room room)
+        {
+            Assert.IsNull(this.Room, "既に部屋が存在するのに登録処理を行いました");
+            this.Room = room;
         }
 
         public void ClearEvent()

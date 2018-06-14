@@ -44,6 +44,7 @@ namespace RL.FieldSystems
                     var i = (fixedSize.x * y) + x;
                     this.Cells[i] = cell;
                     cell.SetCanMove(true);
+                    cell.RegisterRoom(this);
                 }
             }
 
