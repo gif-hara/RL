@@ -19,7 +19,7 @@ MonoBehaviour:
     Texture: {fileID: 0}
     Color: {r: 0, g: 0.757931, b: 1, a: 1}
     Parameter:
-      HitPoint: 10
+      HitPoint: 9999999
       Strength: 1
       Defence: 0
       Speed: 1

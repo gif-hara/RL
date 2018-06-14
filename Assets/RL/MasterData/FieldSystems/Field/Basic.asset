@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Basic
   m_EditorClassIdentifier: 
   roomMin:
-    x: 1
-    y: 2
+    x: 3
+    y: 3
   roomMax:
     x: 3
     y: 3
@@ -30,8 +30,8 @@ MonoBehaviour:
     x: 2
     y: 4
   enemyNumber:
-    x: 1
-    y: 1
+    x: 60
+    y: 60
   enemyTable:
     elements:
     - specId: 1
