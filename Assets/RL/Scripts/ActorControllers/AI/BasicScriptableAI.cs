@@ -44,6 +44,7 @@ namespace RL.ActorControllers.AI
                     if(this.targetActor.CellController.Room != cell.Room)
                     {
                         this.targetActor = null;
+                        this.targetCell = null;
                     }
                     else
                     {
