@@ -50,12 +50,12 @@ namespace RL.ActorControllers.AI
                 .SubscribeWithState(actor, (_, a) =>
                 {
                     // 足踏み
-                    if(GetKeyDown(KeyCode.S))
+                    if(GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.R))
                     {
                         Broker.Global.Publish(EndTurn.Get(this.actor));
                         return;
                     }
-                    
+
                     int x = 0, y = 0;
 
                     if (GetKeyDown(KeyCode.W) || GetKeyDown(KeyCode.Q) || GetKeyDown(KeyCode.E))
