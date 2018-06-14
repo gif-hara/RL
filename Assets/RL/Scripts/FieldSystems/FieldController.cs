@@ -120,6 +120,73 @@ namespace RL.FieldSystems
         }
 
         /// <summary>
+        /// 自分自身の座標を含む周りのセルを返す
+        /// </summary>
+        /// /// <remarks>
+        /// <paramref name="radius"/>が<c>1</c>の場合・・・
+        /// ***
+        /// *i*
+        /// ***
+        /// 上記のセルを返す
+        /// </remarks>
+        public static List<CellController> GetCellRange(Point id, int radius)
+        {
+            var min = new Point(
+                Mathf.Max(0, id.x - radius),
+                Mathf.Max(0, id.y - radius)
+            );
+            var max = new Point(
+                Mathf.Min(XMax, id.x + radius),
+                Mathf.Min(YMax, id.y + radius)
+            );
+
+            var result = new List<CellController>();
+            for(var y = min.y; y < max.y; ++y)
+            {
+                for(var x = min.x; x < max.x; ++x)
+                {
+                    result.Add(Cells[y, x]);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 自分自身の座標を含む十字方向のセルを返す
+        /// </summary>
+        /// /// <remarks>
+        /// <paramref name="amount"/>が<c>1</c>の場合・・・
+        ///  *
+        /// *i*
+        ///  *
+        /// 上記のセルを返す
+        /// </remarks>
+        public static List<CellController> GetCellCross(Point id, int amount)
+        {
+            var min = new Point(
+                Mathf.Max(0, id.x - amount),
+                Mathf.Max(0, id.y - amount)
+            );
+            var max = new Point(
+                Mathf.Min(XMax - 1, id.x + amount),
+                Mathf.Min(YMax - 1, id.y + amount)
+            );
+
+            var result = new List<CellController>();
+            for (var y = min.y; y <= max.y; ++y)
+            {
+                result.Add(Cells[y, id.x]);
+            }
+            for (var x = min.x; x <= max.x; ++x)
+            {
+                result.Add(Cells[id.y, x]);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// <paramref name="from"/>から<paramref name="to"/>の間に移動不可能なセルが存在するか返す
         /// </summary>
         public static bool IsExistCanNotMoveCell(Point from, Point to)

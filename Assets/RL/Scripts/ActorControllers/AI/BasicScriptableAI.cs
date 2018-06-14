@@ -45,10 +45,26 @@ namespace RL.ActorControllers.AI
                     this.targetCell = entrance.AisleCell;
                 }
             }
+            // 通路にいるときの挙動
+            else
+            {
+                var movableCells = FieldController.GetCellCross(cell.Id, 1)
+                    .Where(c => c.CanMove)
+                    .Where(c => c.Id != cell.Id)
+                    .Where(c => c.Id != cell.Id + this.lastMoveDirection.Invert().ToPoint())
+                    .ToArray();
+                this.targetCell = movableCells[Random.Range(0, movableCells.Length)];
+            }
 
             var velocity = FieldController.GetTargetPointSign(cell.Id, this.targetCell.Id);
             this.lastMoveDirection = velocity.ToDirection();
             this.actor.NextPosition(cell.Id + velocity);
+
+            // 通路から部屋へ入った場合
+            if(!cell.IsRoom && this.actor.CellController.IsRoom)
+            {
+                this.targetCell = null;
+            }
         }
     }
 }
