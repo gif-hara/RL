@@ -75,7 +75,7 @@ namespace RL.ActorControllers.AI
                         var entrances = cell.Room.Entrances.Where(e => e.CellController != cell);
                         entrance = entrances.Random();
                     }
-                    
+
                     this.targetCell = entrance.AisleCell;
                 }
             }
@@ -102,7 +102,7 @@ namespace RL.ActorControllers.AI
                         .Where(c => c.RideActor == null);
                     if(movableCells.Any())
                     {
-                        this.targetCell = movableCells.ElementAt(Random.Range(0, movableCells.Count()));
+                        this.targetCell = movableCells.Random();
                     }
                     // 移動可能なセルがない場合は後ろへ戻る
                     else

@@ -72,7 +72,7 @@ namespace RL.FieldSystems
         {
             get
             {
-                return this.Cells[UnityEngine.Random.Range(0, this.Cells.Length)];
+                return this.Cells.Random();
             }
         }
     }
