@@ -18,8 +18,7 @@ namespace RL.ActorControllers
 
         public void SpawnPlayer()
         {
-            var actor = this.Spawn(ActorType.Player, ActorSpecDatabase.Get[0]);
-            actor.gameObject.AddComponent<PlayerController>();
+            this.Spawn(ActorType.Player, ActorSpecDatabase.Get[0]);
         }
 
         public void SpawnEnemy(ActorSpec spec, Point position)

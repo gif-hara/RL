@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HK.Framework.EventSystems;
+using RL.ActorControllers.AI;
 using RL.Events.ActorControllers;
 using RL.FieldSystems;
 using RL.GameSystems;
@@ -38,6 +39,8 @@ namespace RL.ActorControllers
 
         public ActorParameter CurrentParameter { get; private set; }
 
+        public IAI AI { get; private set; }
+
         public static readonly List<Actor> Instances = new List<Actor>();
 
         public static Actor Player { get; set; }
@@ -63,6 +66,8 @@ namespace RL.ActorControllers
             this.cachedTransform.sizeDelta = Vector2.one * size;
             this.Spec = spec;
             this.CurrentParameter = new ActorParameter(this.Spec.Parameter);
+            this.AI = this.Spec.ClonedAI;
+            this.AI.Initialize(this);
             this.image.texture = this.Spec.Texture;
             this.image.color = this.Spec.Color;
         }

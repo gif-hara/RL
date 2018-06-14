@@ -10,6 +10,8 @@ namespace RL.ActorControllers.AI
     {
         protected Actor actor;
 
+        public abstract ScriptableAI Clone { get; }
+
         public virtual void Initialize(Actor actor)
         {
             this.actor = actor;

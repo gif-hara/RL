@@ -30,9 +30,13 @@ namespace RL.ActorControllers
                 });
             Broker.Global.Receive<EndTurn>()
                 .Where(x => x.Actor.IsPlayer)
-                .SubscribeWithState(this, (x, _this) =>
+                .SubscribeWithState(this, (e, _this) =>
                 {
-                    Debug.Log("TODO: エネミーの行動処理");
+                    var id = new Point(
+                        Random.Range(-1, 2),
+                        Random.Range(-1, 2)
+                    );
+                    _this.actor.NextPosition(_this.actor.Id + id);
                 })
                 .AddTo(this.actor);
         }

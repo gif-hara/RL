@@ -35,8 +35,6 @@ namespace RL.GameSystems
         private ActorSpecDatabase actorSpecDatabase;
         public ActorSpecDatabase ActorSpecDatabase { get { return this.actorSpecDatabase; } }
 
-        public PlayerController PlayerController { get; set; }
-
         void Awake()
         {
             instance = this;

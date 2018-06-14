@@ -1,5 +1,6 @@
 ﻿using System;
 using HK.Framework.Text;
+using RL.ActorControllers.AI;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -20,5 +21,9 @@ namespace RL.ActorControllers
         public Color Color;
 
         public ActorParameter Parameter;
+
+        [SerializeField]
+        private ScriptableAI ai;
+        public ScriptableAI ClonedAI { get { return ai.Clone; } }
     }
 }

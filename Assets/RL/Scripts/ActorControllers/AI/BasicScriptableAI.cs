@@ -14,6 +14,15 @@ namespace RL.ActorControllers.AI
     [CreateAssetMenu(menuName = "RL/ActorControllers/AI/Basic")]
     public sealed class BasicScriptableAI : ScriptableAI
     {
+        public override ScriptableAI Clone
+        {
+            get
+            {
+                var clone = CreateInstance<BasicScriptableAI>();
+                return clone;
+            }
+        }
+
         public override void Action()
         {
         }
