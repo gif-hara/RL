@@ -115,7 +115,21 @@ namespace RL.ActorControllers.AI
 
             // 目標のセルへ移動する
             Assert.IsTrue(this.targetCell.CanMove, $"{this.actor.Spec.Name}が移動不可能なセルへ移動しようとしています cellId = {this.targetCell.Id}");
-            var velocity = FieldController.GetTargetPointSign(cell.Id, this.targetCell.Id);
+            var velocity = FieldController.GetTargetPointSign(
+                cell.Id,
+                this.targetCell.Id,
+                (from, to) =>
+                {
+                    // 味方が移動先にいる場合は移動できない
+                    var actor = FieldController.Cells[to.y, to.x].RideActor;
+                    if(actor != null && !this.actor.IsOpponent(actor))
+                    {
+                        return false;
+                    }
+
+                    return FieldController.CanMove(from, to);
+                }
+                );
             this.lastMoveDirection = velocity.ToDirection();
             this.actor.NextPosition(cell.Id + velocity);
 

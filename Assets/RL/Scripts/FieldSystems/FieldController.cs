@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HK.Framework.EventSystems;
 using RL.ActorControllers;
@@ -97,19 +98,19 @@ namespace RL.FieldSystems
         /// <summary>
         /// <paramref name="to"/>へ移動するためのSignされた<see cref="Point"/>を返す
         /// </summary>
-        public static Point GetTargetPointSign(Point from, Point to)
+        public static Point GetTargetPointSign(Point from, Point to, Func<Point, Point, bool> selector)
         {
             for(var i = 0; i <= 4; ++i)
             {
                 var result = (to - from)
                     .ToDirection();
                 var left = result.RotateToLeft(i).ToPoint();
-                if(CanMove(from, from + left))
+                if(selector(from, from + left))
                 {
                     return left;
                 }
                 var right = result.RotateToRight(i).ToPoint();
-                if(CanMove(from, from + right))
+                if(selector(from, from + right))
                 {
                     return right;
                 }
