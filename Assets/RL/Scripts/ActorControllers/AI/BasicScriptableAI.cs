@@ -53,13 +53,10 @@ namespace RL.ActorControllers.AI
                 }
                 if(this.targetActor == null)
                 {
-                    var opponents = cell.Room.Cells
-                        .Where(c => c.RideActor != null)
-                        .Select(c => c.RideActor)
-                        .Where(a => this.actor.IsOpponent(a));
+                    var opponents = cell.Room.Cells.RideOpponents(this.actor).Select(c => c.RideActor);
                     if(opponents.Any())
                     {
-                        this.targetActor = opponents.ElementAt(Random.Range(0, opponents.Count()));
+                        this.targetActor = opponents.Random();
                         this.targetCell = this.targetActor.CellController;
                     }
                 }
@@ -78,13 +75,37 @@ namespace RL.ActorControllers.AI
             {
                 var movableCells = FieldController.GetCellCross(cell.Id, 1)
                     .Where(c => c.CanMove)
-                    .Where(c => c.Id != cell.Id)
-                    .Where(c => c.Id != cell.Id + this.lastMoveDirection.Invert().ToPoint()) // 逆方向へは移動しない
-                    .Where(c => c.RideActor == null);
-                this.targetCell = movableCells.ElementAt(Random.Range(0, movableCells.Count()));
+                    .Where(c => c.Id != cell.Id);
+                var opponents = movableCells
+                    .RideOpponents(this.actor)
+                    .Select(c => c.RideActor);
+
+                // 敵対するアクターが存在する場合は優先的に狙う
+                if(opponents.Any())
+                {
+                    this.targetActor = opponents.Random();
+                    this.targetCell = this.targetActor.CellController;
+                }
+                else
+                {
+                    movableCells = movableCells
+                        .Where(c => c.Id != cell.Id + this.lastMoveDirection.Invert().ToPoint()) // 逆方向へは移動しない
+                        .Where(c => c.RideActor == null);
+                    if(movableCells.Any())
+                    {
+                        this.targetCell = movableCells.ElementAt(Random.Range(0, movableCells.Count()));
+                    }
+                    // 移動可能なセルがない場合は後ろへ戻る
+                    else
+                    {
+                        var targetId = cell.Id + this.lastMoveDirection.Invert().ToPoint();
+                        this.targetCell = FieldController.Cells[targetId.y, targetId.x];
+                    }
+                }
             }
 
             // 目標のセルへ移動する
+            Assert.IsTrue(this.targetCell.CanMove, $"{this.actor.Spec.Name}が移動不可能なセルへ移動しようとしています cellId = {this.targetCell.Id}");
             var velocity = FieldController.GetTargetPointSign(cell.Id, this.targetCell.Id);
             this.lastMoveDirection = velocity.ToDirection();
             this.actor.NextPosition(cell.Id + velocity);
