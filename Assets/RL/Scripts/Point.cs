@@ -70,6 +70,14 @@ namespace RL
             }
         }
 
+        public bool IsZero
+        {
+            get
+            {
+                return this == Point.Zero;
+            }
+        }
+
         public static Point operator +(Point left, Point right)
         {
             return new Point(left.x + right.x, left.y + right.y);

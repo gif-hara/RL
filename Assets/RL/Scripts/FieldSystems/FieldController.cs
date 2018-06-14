@@ -115,8 +115,7 @@ namespace RL.FieldSystems
                     return right;
                 }
             }
-
-            Assert.IsTrue(false, $"未定義の動作です from = {from}, to = {to}");
+            
             return Point.Zero;
         }
 

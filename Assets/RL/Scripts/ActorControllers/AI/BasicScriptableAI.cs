@@ -113,8 +113,20 @@ namespace RL.ActorControllers.AI
                 }
             }
 
+            this.Move();
+
+            // 通路から部屋へ入った場合
+            if(!cell.IsRoom && this.actor.CellController.IsRoom)
+            {
+                this.targetCell = null;
+            }
+        }
+
+        private void Move()
+        {
             // 目標のセルへ移動する
             Assert.IsTrue(this.targetCell.CanMove, $"{this.actor.Spec.Name}が移動不可能なセルへ移動しようとしています cellId = {this.targetCell.Id}");
+            var cell = this.actor.CellController;
             var velocity = FieldController.GetTargetPointSign(
                 cell.Id,
                 this.targetCell.Id,
@@ -122,21 +134,17 @@ namespace RL.ActorControllers.AI
                 {
                     // 味方が移動先にいる場合は移動できない
                     var actor = FieldController.Cells[to.y, to.x].RideActor;
-                    if(actor != null && !this.actor.IsOpponent(actor))
+                    if (actor != null && !this.actor.IsOpponent(actor))
                     {
                         return false;
                     }
 
                     return FieldController.CanMove(from, to);
-                }
-                );
-            this.lastMoveDirection = velocity.ToDirection();
-            this.actor.NextPosition(cell.Id + velocity);
-
-            // 通路から部屋へ入った場合
-            if(!cell.IsRoom && this.actor.CellController.IsRoom)
+                });
+            if(!velocity.IsZero)
             {
-                this.targetCell = null;
+                this.lastMoveDirection = velocity.ToDirection();
+                this.actor.NextPosition(cell.Id + velocity);
             }
         }
     }
