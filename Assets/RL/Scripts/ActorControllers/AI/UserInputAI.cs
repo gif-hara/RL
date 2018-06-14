@@ -49,6 +49,13 @@ namespace RL.ActorControllers.AI
                 .Where(_ => actor.isActiveAndEnabled)
                 .SubscribeWithState(actor, (_, a) =>
                 {
+                    // 足踏み
+                    if(GetKeyDown(KeyCode.S))
+                    {
+                        Broker.Global.Publish(EndTurn.Get(this.actor));
+                        return;
+                    }
+                    
                     int x = 0, y = 0;
 
                     if (GetKeyDown(KeyCode.W) || GetKeyDown(KeyCode.Q) || GetKeyDown(KeyCode.E))
