@@ -19,6 +19,8 @@ namespace RL.FieldSystems
 
         public readonly Edges Edges;
 
+        public readonly List<Entrance> Entrances = new List<Entrance>();
+
         public Room(Point id, Point start, Point size, Point paddingMin, Point paddingMax, Point offsetSize)
         {
             this.Id = id;

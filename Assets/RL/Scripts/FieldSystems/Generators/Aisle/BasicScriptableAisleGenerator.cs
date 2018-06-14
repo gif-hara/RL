@@ -65,17 +65,20 @@ namespace RL.FieldSystems.Generators.Aisle
             var centerId = (startId + endId) / 2;
 
             // 始点から通路を作成
-            this.SetCanMove(startId, centerId, direction);
+            this.Generate(a, startId, centerId, direction);
 
             // 終点から通路を作成
-            this.SetCanMove(endId, centerId, invertDirection);
+            this.Generate(b, endId, centerId, invertDirection);
         }
 
         /// <summary>
         /// <paramref name="to"/>までの通路を作成する
         /// </summary>
-        private void SetCanMove(Point from, Point to, Direction direction)
+        private void Generate(Room room, Point from, Point to, Direction direction)
         {
+            // 最初のセルを入り口とする
+            room.Entrances.Add(new Entrance(FieldController.Cells[from.y, from.x], direction));
+
             while(from != to)
             {
                 from += direction.ToPoint();
