@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c932cb5455f464b288e33eb7fa54f213, type: 3}
+  m_Name: ActorNames
+  m_EditorClassIdentifier: 
+  database:
+  - value:
+      ja: "\u30D7\u30EC\u30A4\u30E4\u30FC"
+      en: 
+    guid: b785a1a0-2d04-4863-9106-5cc4af989cca
+  - value:
+      ja: "\u65750 Lv.1"
+      en: 
+    guid: ee2c8ddb-1553-4a82-b695-f11472aed6b4
+  - value:
+      ja: "\u65750 Lv.2"
+      en: 
+    guid: 71c2c6d9-be5b-4273-9c42-b45ff39d93ee
+  - value:
+      ja: "\u65750 Lv.3"
+      en: 
+    guid: e3966477-ebaa-475f-848d-d4d2186b2fe6
+  - value:
+      ja: "\u65751 Lv.1"
+      en: 
+    guid: 26261910-3482-4d2c-9771-14dfb3231aa5
+  - value:
+      ja: "\u65751 Lv.2"
+      en: 
+    guid: e2d02fb6-3140-445e-adfb-17f23506823b
+  - value:
+      ja: "\u65751 Lv.3"
+      en: 
+    guid: f39bfaeb-d14c-479c-91b9-ca555bd584ff

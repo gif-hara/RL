@@ -12,49 +12,77 @@ MonoBehaviour:
   m_Name: ActorSpecDatabase
   m_EditorClassIdentifier: 
   Specs:
-  - Texture: {fileID: 0}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u30D7\u30EC\u30A4\u30E4\u30FC"
+      guid: b785a1a0-2d04-4863-9106-5cc4af989cca
+    Texture: {fileID: 0}
     Color: {r: 0, g: 0.757931, b: 1, a: 1}
     Parameter:
       HitPoint: 10
       Strength: 1
       Defence: 0
       Speed: 1
-  - Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u65750 Lv.1"
+      guid: ee2c8ddb-1553-4a82-b695-f11472aed6b4
+    Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
     Color: {r: 0.15534878, g: 0, b: 1, a: 1}
     Parameter:
       HitPoint: 10
       Strength: 1
       Defence: 0
       Speed: 1
-  - Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u65750 Lv.2"
+      guid: 71c2c6d9-be5b-4273-9c42-b45ff39d93ee
+    Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
     Color: {r: 0.8441864, g: 0, b: 0.8679245, a: 1}
     Parameter:
       HitPoint: 10
       Strength: 1
       Defence: 0
       Speed: 1
-  - Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u65750 Lv.3"
+      guid: e3966477-ebaa-475f-848d-d4d2186b2fe6
+    Texture: {fileID: 2800000, guid: 5ac76465e54914e5f866a375916cd82f, type: 3}
     Color: {r: 0.8679245, g: 0, b: 0.054868553, a: 1}
     Parameter:
       HitPoint: 10
       Strength: 1
       Defence: 0
       Speed: 1
-  - Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u65751 Lv.1"
+      guid: 26261910-3482-4d2c-9771-14dfb3231aa5
+    Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
     Color: {r: 0.15534878, g: 0, b: 1, a: 1}
     Parameter:
       HitPoint: 10
       Strength: 1
       Defence: 0
       Speed: 1
-  - Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u65751 Lv.2"
+      guid: e2d02fb6-3140-445e-adfb-17f23506823b
+    Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
     Color: {r: 0.8441864, g: 0, b: 0.8679245, a: 1}
     Parameter:
       HitPoint: 10
       Strength: 1
       Defence: 0
       Speed: 1
-  - Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
+  - name:
+      target: {fileID: 11400000, guid: bbb8df36a90144f958f1b3e0881f6406, type: 2}
+      value: "\u65751 Lv.3"
+      guid: f39bfaeb-d14c-479c-91b9-ca555bd584ff
+    Texture: {fileID: 2800000, guid: 90a8428f62a3848f4aa322431b336327, type: 3}
     Color: {r: 0.8679245, g: 0, b: 0.054868553, a: 1}
     Parameter:
       HitPoint: 10

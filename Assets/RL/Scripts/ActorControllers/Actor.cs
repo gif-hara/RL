@@ -101,7 +101,7 @@ namespace RL.ActorControllers
                     return true;
                 }
 
-                Assert.IsTrue(false, "targetActorに対して何もしませんでした");
+                Assert.IsTrue(false, $"{this.Spec.Name}は{targetActor.Spec.Name}に対して何もしませんでした");
                 return false;
             }
             else if (FieldController.CanMove(this.Id, nextId))
