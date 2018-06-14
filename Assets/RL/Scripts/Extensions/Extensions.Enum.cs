@@ -137,5 +137,27 @@ namespace RL.Extensions
                 return (Direction)(id - 4);
             }
         }
+
+        public static Direction RotateToLeft(this Direction self, int amount)
+        {
+            var result = (int)self - amount;
+            while(result <= 0)
+            {
+                result += 8;
+            }
+
+            return (Direction)result;
+        }
+
+        public static Direction RotateToRight(this Direction self, int amount)
+        {
+            var result = (int)self + amount;
+            while (result > 8)
+            {
+                result -= 8;
+            }
+
+            return (Direction)result;
+        }
     }
 }

@@ -30,8 +30,8 @@ MonoBehaviour:
     x: 2
     y: 4
   enemyNumber:
-    x: 30
-    y: 30
+    x: 1
+    y: 1
   enemyTable:
     elements:
     - specId: 1

@@ -41,6 +41,11 @@ namespace RL.FieldSystems
         /// </summary>
         public Room Room { get; private set; }
 
+        /// <summary>
+        /// このセルを含んでいる入り口
+        /// </summary>
+        public Entrance Entrance { get; private set; }
+
         private ICellEvent cellEvent;
 
         public void Initialize(Point id, Vector2 position, float size)
@@ -83,6 +88,12 @@ namespace RL.FieldSystems
             this.Room = room;
         }
 
+        public void RegisterEntrance(Entrance entrance)
+        {
+            Assert.IsNull(this.Entrance, "既に入り口が存在するのに登録処理を行いました");
+            this.Entrance = entrance;
+        }
+
         public void ClearEvent()
         {
             this.cellEvent = null;
@@ -107,6 +118,22 @@ namespace RL.FieldSystems
             }
             Assert.AreEqual(actor, this.RideActor, $"別の{typeof(Actor).Name}がLeaveしました Id = {this.Id}");
             this.RideActor = null;
+        }
+
+        public bool IsRoom
+        {
+            get
+            {
+                return this.Room != null;
+            }
+        }
+
+        public bool IsEntrance
+        {
+            get
+            {
+                return this.Entrance != null;
+            }
         }
     }
 }

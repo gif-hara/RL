@@ -40,6 +40,14 @@ namespace RL
             }
         }
 
+        public Point Sign
+        {
+            get
+            {
+                return new Point((int)Math.Sign(this.x), (int)Math.Sign(this.y));
+            }
+        }
+
         /// <summary>
         /// 水平方向の要素を返す
         /// </summary>

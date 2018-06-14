@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using RL.Extensions;
+using RL.FieldSystems;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace RL.ActorControllers.AI
@@ -14,6 +17,10 @@ namespace RL.ActorControllers.AI
     [CreateAssetMenu(menuName = "RL/ActorControllers/AI/Basic")]
     public sealed class BasicScriptableAI : ScriptableAI
     {
+        private CellController targetCell;
+
+        private Direction lastMoveDirection;
+
         public override ScriptableAI Clone
         {
             get
@@ -25,6 +32,23 @@ namespace RL.ActorControllers.AI
 
         public override void Action()
         {
+            var cell = this.actor.CellController;
+            // 部屋にいるときの挙動
+            if(cell.IsRoom)
+            {
+                // 次の移動先が決まってない場合は決める
+                if (this.targetCell == null)
+                {
+                    // 自分がいるセルを除く入り口を取得する
+                    var entrances = cell.Room.Entrances.Where(e => e.CellController != cell);
+                    var entrance = entrances.ElementAt(Random.Range(0, entrances.Count()));
+                    this.targetCell = entrance.AisleCell;
+                }
+            }
+
+            var velocity = FieldController.GetTargetPointSign(cell.Id, this.targetCell.Id);
+            this.lastMoveDirection = velocity.ToDirection();
+            this.actor.NextPosition(cell.Id + velocity);
         }
     }
 }

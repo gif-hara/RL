@@ -95,6 +95,31 @@ namespace RL.FieldSystems
         }
 
         /// <summary>
+        /// <paramref name="to"/>へ移動するためのSignされた<see cref="Point"/>を返す
+        /// </summary>
+        public static Point GetTargetPointSign(Point from, Point to)
+        {
+            for(var i = 0; i <= 4; ++i)
+            {
+                var result = (to - from)
+                    .ToDirection();
+                var left = result.RotateToLeft(i).ToPoint();
+                if(CanMove(from, from + left))
+                {
+                    return left;
+                }
+                var right = result.RotateToRight(i).ToPoint();
+                if(CanMove(from, from + right))
+                {
+                    return right;
+                }
+            }
+
+            Assert.IsTrue(false, $"未定義の動作です from = {from}, to = {to}");
+            return Point.Zero;
+        }
+
+        /// <summary>
         /// <paramref name="from"/>から<paramref name="to"/>の間に移動不可能なセルが存在するか返す
         /// </summary>
         public static bool IsExistCanNotMoveCell(Point from, Point to)

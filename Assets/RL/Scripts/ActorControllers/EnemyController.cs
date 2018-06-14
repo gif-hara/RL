@@ -32,11 +32,7 @@ namespace RL.ActorControllers
                 .Where(x => x.Actor.IsPlayer)
                 .SubscribeWithState(this, (e, _this) =>
                 {
-                    var id = new Point(
-                        Random.Range(-1, 2),
-                        Random.Range(-1, 2)
-                    );
-                    _this.actor.NextPosition(_this.actor.Id + id);
+                    _this.actor.AI.Action();
                 })
                 .AddTo(this.actor);
         }

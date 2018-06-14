@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RL.Extensions;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace RL.FieldSystems
@@ -30,6 +31,15 @@ namespace RL.FieldSystems
         {
             this.CellController = cellController;
             this.ToAisleDirection = toAisleDirection;
+        }
+
+        public CellController AisleCell
+        {
+            get
+            {
+                var id = this.CellController.Id + this.ToAisleDirection.ToPoint();
+                return FieldController.Cells[id.y, id.x];
+            }
         }
     }
 }
